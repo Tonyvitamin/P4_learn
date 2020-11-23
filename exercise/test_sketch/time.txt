@@ -1,0 +1,3 @@
+RuntimeCmd: cur_timestamp= 0
+RuntimeCmd: last_timestamp= 0
+RuntimeCmd: 

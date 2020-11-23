@@ -1,0 +1,48 @@
+Calling target program-options parser
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act': act - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'MyIngress.ipv4_lpm': NoAction - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_0': act_30 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_1': act_0 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_Measurement_heavy_part_init': MyIngress.Measurement.heavy_part_init_1 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_2': act_2 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_3': act_1 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_4': act_3 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_5': act_4 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_Measurement_heavy_part_init_0': MyIngress.Measurement.heavy_part_init_1 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_6': act_5 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_Measurement_heavy_part_init_1': MyIngress.Measurement.heavy_part_init_1 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_7': act_6 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_8': act_7 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_9': act_10 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_10': act_9 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_11': act_8 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_12': act_11 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_13': act_14 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_14': act_13 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_15': act_12 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_16': act_15 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_17': act_16 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_18': act_17 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_Measurement_heavy_part_init_2': MyIngress.Measurement.heavy_part_init_1 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_19': act_19 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_20': act_18 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_21': act_20 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_22': act_21 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_Measurement_heavy_part_init_3': MyIngress.Measurement.heavy_part_init_1 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_23': act_22 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_Measurement_heavy_part_init_4': MyIngress.Measurement.heavy_part_init_1 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_24': act_23 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_Measurement_heavy_part_init_5': MyIngress.Measurement.heavy_part_init_2 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_25': act_25 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_26': act_24 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_27': act_26 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_28': act_27 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_Measurement_heavy_part_init_6': MyIngress.Measurement.heavy_part_init_2 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_29': act_28 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_Measurement_heavy_part_init_7': MyIngress.Measurement.heavy_part_init_1 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_30': act_29 - 
+[10:53:53.395] [bmv2] [D] [thread 7846] Set default default entry for table 'tbl_act_31': act_31 - 
+I1123 10:53:53.397074172    7846 server_builder.cc:247]      Synchronous server. Num CQs: 1, Min pollers: 1, Max Pollers: 2147483647, CQ timeout (msec): 1000
+Server listening on 0.0.0.0:50052
+[10:53:53.398] [bmv2] [I] [thread 7846] Starting Thrift server on port 9091
+[10:53:53.398] [bmv2] [I] [thread 7846] Thrift server was started
