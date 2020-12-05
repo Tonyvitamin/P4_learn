@@ -184,57 +184,45 @@ control Measurement(inout headers hdr,
                     inout metadata meta,
                     inout standard_metadata_t standard_metadata) {
 
-    /* Sketch 1: Elastic Sketch */
-
-    register<bit<72> >(HEAVY_PART_COUNTER_SIZE) heavy_counters_flowID_1;
-    register<bit<32> >(HEAVY_PART_COUNTER_SIZE) heavy_counters_p_vote_1;
-    register<bit<1> >(HEAVY_PART_COUNTER_SIZE) heavy_counters_flag_1;
-    register<bit<32> >(HEAVY_PART_COUNTER_SIZE) heavy_counters_total_vote_1;
+    /* Sketch 1: CM Sketch */
 
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch1_r1;
-    //register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch1_r2;
-    //register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch1_r3;
-    //register<bit<32> >(1) old_cms_estimate;
-    //register<bit<32> >(1) new_cms_estimate;
-
-    /* Sketch 2: Elastic Sketch */
+    register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch1_r2;
+    register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch1_r3;
 
 
-    register<bit<72> >(HEAVY_PART_COUNTER_SIZE) heavy_counters_flowID_2;
-    register<bit<32> >(HEAVY_PART_COUNTER_SIZE) heavy_counters_p_vote_2;
-    register<bit<1> >(HEAVY_PART_COUNTER_SIZE) heavy_counters_flag_2;
-    register<bit<32> >(HEAVY_PART_COUNTER_SIZE) heavy_counters_total_vote_2;
+    /* Sketch 2: CM Sketch */
 
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch2_r1;
-    //register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch2_r2;
-    //register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch2_r3;
+    register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch2_r2;
+    register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch2_r3;
+
+    /* Sketch 3: CM Sketch */
+
+    register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch3_r1;
+    register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch3_r2;
+    register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch3_r3;
 
 
+    /* Sketch 4: CM Sketch */
 
+    register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch4_r1;
+    register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch4_r2;
+    register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch4_r3;
+
+
+    /* Queried Mask(bloom filter) */
+    // In case that queried flow keep forwarding packet to controller to remind controller this flow change
+    register<bit<2> > (FLOW_TABLE_SIZE_EACH) mask_queried_1;
+    register<bit<2> > (FLOW_TABLE_SIZE_EACH) mask_queried_2;
 
     register<bit<48> > (1) last_timestamp;
     register<bit<48> > (1) cur_timestamp;
+    register<bit<8> > (1) time_flag;
+    register<bit<2> >(1) query_flag;
 
-    action heavy_part_init_1() {
-        hash(meta.ha_heavy, HashAlgorithm.crc16, HASH_BASE_heavy,
-                {meta.flowID, HASH_SEED_heavy}, HASH_MAX_HEAVY);
 
-        heavy_counters_flowID_1.read(meta.ha_tuple.flowID, meta.ha_heavy);
-        heavy_counters_p_vote_1.read(meta.ha_tuple.p_vote, meta.ha_heavy);
-        heavy_counters_flag_1.read(meta.ha_tuple.flag, meta.ha_heavy);
-        heavy_counters_total_vote_1.read(meta.ha_tuple.total_vote, meta.ha_heavy);
-    }
-
-    action heavy_part_init_2() {
-        hash(meta.ha_heavy, HashAlgorithm.crc16, HASH_BASE_heavy,
-                {meta.flowID, HASH_SEED_heavy}, HASH_MAX_HEAVY);
-
-        heavy_counters_flowID_2.read(meta.ha_tuple.flowID, meta.ha_heavy);
-        heavy_counters_p_vote_2.read(meta.ha_tuple.p_vote, meta.ha_heavy);
-        heavy_counters_flag_2.read(meta.ha_tuple.flag, meta.ha_heavy);
-        heavy_counters_total_vote_2.read(meta.ha_tuple.total_vote, meta.ha_heavy);
-    }
-    /*action min_cnt(inout bit<32> mincnt, in bit<32> cnt1, in bit<32> cnt2, in bit<32> cnt3){
+    action min_cnt(inout bit<32> mincnt, in bit<32> cnt1, in bit<32> cnt2, in bit<32> cnt3){
         if(cnt1 < cnt2){
             mincnt = cnt1;
         }
@@ -245,7 +233,7 @@ control Measurement(inout headers hdr,
         if(mincnt>cnt3){
             mincnt = cnt3;
         }
-    }*/
+    }
     apply{
             meta.srcIP = hdr.ipv4.srcAddr;
             meta.dstIP = hdr.ipv4.dstAddr;
@@ -258,539 +246,372 @@ control Measurement(inout headers hdr,
             meta.flow_cnt = 1;//standard_metadata.packet_length;
             hash(meta.ha_heavy, HashAlgorithm.crc16, HASH_BASE, {meta.flowID, HASH_SEED_heavy}, HASH_MAX_HEAVY);
             hash(meta.ha_r1, HashAlgorithm.crc16, HASH_BASE, {meta.flowID, HASH_SEED_r1}, HASH_MAX);
-            //hash(meta.ha_r2, HashAlgorithm.crc16, HASH_BASE, {meta.flowID, HASH_SEED_r2}, HASH_MAX);
-            //hash(meta.ha_r3, HashAlgorithm.crc16, HASH_BASE, {meta.flowID, HASH_SEED_r3}, HASH_MAX);
+            hash(meta.ha_r2, HashAlgorithm.crc16, HASH_BASE, {meta.flowID, HASH_SEED_r2}, HASH_MAX);
+            hash(meta.ha_r3, HashAlgorithm.crc16, HASH_BASE, {meta.flowID, HASH_SEED_r3}, HASH_MAX);
 
             bit<48>  t_diff;
             bit<48>  ct;
             bit<48>  lt;
+            bit<8>   flag;
+            bit<2>   q_flag;
             //cur_timestamp.read(ct, 0);
             ct = standard_metadata.ingress_global_timestamp;
-            cur_timestamp.write(0, standard_metadata.ingress_global_timestamp);
 
+            cur_timestamp.write(0, standard_metadata.ingress_global_timestamp);
             last_timestamp.read(lt, 0);
+
+            time_flag.read(flag, 0);
+            query_flag.read(q_flag, 0);
+
             t_diff = ct - lt;
 
-            // Measurement & Update interval info
+            // Circular 4 phase process & query 
+            if(t_diff>20000000){
+                time_flag.write(0, 0);
+                last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
+                query_flag.write(0, 0);
+            }
+            // Phase 1
+            // 1. Process packet & store packet counter into sketch 1 (CM sketch)
+            // 2. Reset Sketch 2 to 0
+            // 3. Query Sketch 4 & Sketch 3 ( S4[i] - S3[i] ), for any flow "i"
+            // 4. Transition to Phase 2
+            else{
+                if(flag==0){
 
 
-            // Measurement start up
-            if(lt==0){
-                last_timestamp.write(0, ct);
-
-
-
-                /**** heavy part process ****/
-                heavy_part_init_1();
-                bit<1> is_heavy_processed = 0;
-
-                // f == f
-                if(meta.ha_tuple.flowID == meta.flowID){
-                    heavy_counters_p_vote_1.write(meta.ha_heavy, meta.ha_tuple.p_vote + meta.flow_cnt);
-                    is_heavy_processed = 1;
-                }
-
-                // f = empty
-                if(meta.ha_tuple.flowID == IDLE_HEAVY_COUNTER_FLOWID){
-                    // hashed counter in heavy part is idle
-                    heavy_counters_flowID_1.write(meta.ha_heavy, meta.flowID);
-                    heavy_counters_p_vote_1.write(meta.ha_heavy, 32w1);
-                    heavy_counters_flag_1.write(meta.ha_heavy, 1w0);
-
-                    is_heavy_processed = 1w1;
-                }
-            
-                heavy_counters_total_vote_1.write(meta.ha_heavy, meta.ha_tuple.total_vote + 1);
-                heavy_part_init_1();
-
-                if (meta.ha_tuple.p_vote * EVICT_THRESHOLD <= meta.ha_tuple.total_vote) {
-                    // evict the current 'heavy' flow
-                    is_heavy_processed = 1w0;
-
-                    // exchange the value of 'current heavy flow' and 'new flow'
-                    bit<72> tmp_flowID = meta.ha_tuple.flowID;
-                    bit<32> tmp_p_vote = meta.ha_tuple.p_vote;
-
-                    heavy_counters_flowID_1.write(meta.ha_heavy, meta.flowID);
-                    heavy_counters_p_vote_1.write(meta.ha_heavy, 32w1);
-                    heavy_counters_flag_1.write(meta.ha_heavy, 1w1);
-                    heavy_counters_total_vote_1.write(meta.ha_heavy, 32w1);
-
-                    // set the 'evicted flow' in meta, for insertion in CMS
-                    meta.flowID = tmp_flowID;
-                    meta.flow_cnt = tmp_p_vote;
-
-                    // reload counters into meta
-                    heavy_part_init_1();
-                }
-
-
-                /**** light part process ****/
-                if(is_heavy_processed == 0){
+                    // Process packet in S1
                     cm_sketch1_r1.read(meta.qc_r1, meta.ha_r1);
-                    cm_sketch1_r1.write(meta.ha_r1, meta.qc_r1 + meta.flow_cnt);
+                    cm_sketch1_r2.read(meta.qc_r2, meta.ha_r2);
+                    cm_sketch1_r3.read(meta.qc_r3, meta.ha_r3);
 
-                }
-                //cm_sketch1_r1.read(meta.qc_r1, meta.ha_r1);
-                //cm_sketch1_r2.read(meta.qc_r2, meta.ha_r2);
-                //cm_sketch1_r3.read(meta.qc_r3, meta.ha_r3);
-
-                //min_cnt(meta.cms_freq_estimate, meta.qc_r1, meta.qc_r2, meta.qc_r3);
-                //cms_estimate.write(0, meta.cms_freq_estimate);
-                //cur_timestamp.write(0, standard_metadata.ingress_global_timestamp);
-
-                //cm_sketch1_r1.write(meta.ha_r1, meta.qc_r1 + meta.flow_cnt);
-                //cm_sketch1_r2.write(meta.ha_r2, meta.qc_r2 + meta.flow_cnt);
-                //cm_sketch1_r3.write(meta.ha_r3, meta.qc_r3 + meta.flow_cnt);
-            }
-
-            // Reset Measurement cycle
-            else if (t_diff > 21000000){
-                last_timestamp.write(0, ct);
-
-                /**** Elastic Sketch 1 reset ****/
-                // Heavy part reset
-                heavy_counters_flowID_1.write(0, 0);
-                heavy_counters_flowID_1.write(1, 0);
-                heavy_counters_flowID_1.write(2, 0);
-                heavy_counters_flowID_1.write(3, 0);
-                heavy_counters_flowID_1.write(4, 0);
-                heavy_counters_flowID_1.write(5, 0);
-                heavy_counters_flowID_1.write(6, 0);
-                heavy_counters_flowID_1.write(7, 0);
-                heavy_counters_flowID_1.write(8, 0);
-                heavy_counters_flowID_1.write(9, 0);
-
-                heavy_counters_p_vote_1.write(0, 0);
-                heavy_counters_p_vote_1.write(1, 0);
-                heavy_counters_p_vote_1.write(2, 0);
-                heavy_counters_p_vote_1.write(3, 0);
-                heavy_counters_p_vote_1.write(4, 0);
-                heavy_counters_p_vote_1.write(5, 0);
-                heavy_counters_p_vote_1.write(6, 0);
-                heavy_counters_p_vote_1.write(7, 0);
-                heavy_counters_p_vote_1.write(8, 0);
-                heavy_counters_p_vote_1.write(9, 0);
-
-                
-                heavy_counters_flag_1.write(0, 0);
-                heavy_counters_flag_1.write(1, 0);
-                heavy_counters_flag_1.write(2, 0);
-                heavy_counters_flag_1.write(3, 0);
-                heavy_counters_flag_1.write(4, 0);
-                heavy_counters_flag_1.write(5, 0);
-                heavy_counters_flag_1.write(6, 0);
-                heavy_counters_flag_1.write(7, 0);
-                heavy_counters_flag_1.write(8, 0);
-                heavy_counters_flag_1.write(9, 0);
-                
-                heavy_counters_total_vote_1.write(0, 0);
-                heavy_counters_total_vote_1.write(1, 0);
-                heavy_counters_total_vote_1.write(2, 0);
-                heavy_counters_total_vote_1.write(3, 0);
-                heavy_counters_total_vote_1.write(4, 0);
-                heavy_counters_total_vote_1.write(5, 0);
-                heavy_counters_total_vote_1.write(6, 0);
-                heavy_counters_total_vote_1.write(7, 0);
-                heavy_counters_total_vote_1.write(8, 0);
-                heavy_counters_total_vote_1.write(9, 0);
-
-                // light part reset
-                cm_sketch1_r1.write(0, 0);
-                cm_sketch1_r1.write(1, 0);
-                cm_sketch1_r1.write(2, 0);
-                cm_sketch1_r1.write(3, 0);
-                cm_sketch1_r1.write(4, 0);
-                cm_sketch1_r1.write(5, 0);
-                cm_sketch1_r1.write(6, 0);
-                cm_sketch1_r1.write(7, 0);
-                cm_sketch1_r1.write(8, 0);
-                cm_sketch1_r1.write(9, 0);
-
-                /*
-                cm_sketch1_r2.write(0, 0);
-                cm_sketch1_r2.write(1, 0);
-                cm_sketch1_r2.write(2, 0);
-                cm_sketch1_r2.write(3, 0);
-                cm_sketch1_r2.write(4, 0);
-                cm_sketch1_r2.write(5, 0);
-                cm_sketch1_r2.write(6, 0);
-                cm_sketch1_r2.write(7, 0);
-                cm_sketch1_r2.write(8, 0);
-                cm_sketch1_r2.write(9, 0);
-
-                cm_sketch1_r3.write(0, 0);
-                cm_sketch1_r3.write(1, 0);
-                cm_sketch1_r3.write(2, 0);
-                cm_sketch1_r3.write(3, 0);
-                cm_sketch1_r3.write(4, 0);
-                cm_sketch1_r3.write(5, 0);
-                cm_sketch1_r3.write(6, 0);
-                cm_sketch1_r3.write(7, 0);
-                cm_sketch1_r3.write(8, 0);
-                cm_sketch1_r3.write(9, 0);
-                */
-
-                /**** Elastic Sketch 2 reset ****/
-                // Heavy part reset
-                heavy_counters_flowID_2.write(0, 0);
-                heavy_counters_flowID_2.write(1, 0);
-                heavy_counters_flowID_2.write(2, 0);
-                heavy_counters_flowID_2.write(3, 0);
-                heavy_counters_flowID_2.write(4, 0);
-                heavy_counters_flowID_2.write(5, 0);
-                heavy_counters_flowID_2.write(6, 0);
-                heavy_counters_flowID_2.write(7, 0);
-                heavy_counters_flowID_2.write(8, 0);
-                heavy_counters_flowID_2.write(9, 0);
-
-                heavy_counters_p_vote_2.write(0, 0);
-                heavy_counters_p_vote_2.write(1, 0);
-                heavy_counters_p_vote_2.write(2, 0);
-                heavy_counters_p_vote_2.write(3, 0);
-                heavy_counters_p_vote_2.write(4, 0);
-                heavy_counters_p_vote_2.write(5, 0);
-                heavy_counters_p_vote_2.write(6, 0);
-                heavy_counters_p_vote_2.write(7, 0);
-                heavy_counters_p_vote_2.write(8, 0);
-                heavy_counters_p_vote_2.write(9, 0);
-
-                
-                heavy_counters_flag_2.write(0, 0);
-                heavy_counters_flag_2.write(1, 0);
-                heavy_counters_flag_2.write(2, 0);
-                heavy_counters_flag_2.write(3, 0);
-                heavy_counters_flag_2.write(4, 0);
-                heavy_counters_flag_2.write(5, 0);
-                heavy_counters_flag_2.write(6, 0);
-                heavy_counters_flag_2.write(7, 0);
-                heavy_counters_flag_2.write(8, 0);
-                heavy_counters_flag_2.write(9, 0);
-                
-                heavy_counters_total_vote_2.write(0, 0);
-                heavy_counters_total_vote_2.write(1, 0);
-                heavy_counters_total_vote_2.write(2, 0);
-                heavy_counters_total_vote_2.write(3, 0);
-                heavy_counters_total_vote_2.write(4, 0);
-                heavy_counters_total_vote_2.write(5, 0);
-                heavy_counters_total_vote_2.write(6, 0);
-                heavy_counters_total_vote_2.write(7, 0);
-                heavy_counters_total_vote_2.write(8, 0);
-                heavy_counters_total_vote_2.write(9, 0);
-
-                // light part reset
-                cm_sketch2_r1.write(0, 0);
-                cm_sketch2_r1.write(1, 0);
-                cm_sketch2_r1.write(2, 0);
-                cm_sketch2_r1.write(3, 0);
-                cm_sketch2_r1.write(4, 0);
-                cm_sketch2_r1.write(5, 0);
-                cm_sketch2_r1.write(6, 0);
-                cm_sketch2_r1.write(7, 0);
-                cm_sketch2_r1.write(8, 0);
-                cm_sketch2_r1.write(9, 0);
-
-                /*
-                cm_sketch2_r2.write(0, 0);
-                cm_sketch2_r2.write(1, 0);
-                cm_sketch2_r2.write(2, 0);
-                cm_sketch2_r2.write(3, 0);
-                cm_sketch2_r2.write(4, 0);
-                cm_sketch2_r2.write(5, 0);
-                cm_sketch2_r2.write(6, 0);
-                cm_sketch2_r2.write(7, 0);
-                cm_sketch2_r2.write(8, 0);
-                cm_sketch2_r2.write(9, 0);
-
-                cm_sketch2_r3.write(0, 0);
-                cm_sketch2_r3.write(1, 0);
-                cm_sketch2_r3.write(2, 0);
-                cm_sketch2_r3.write(3, 0);
-                cm_sketch2_r3.write(4, 0);
-                cm_sketch2_r3.write(5, 0);
-                cm_sketch2_r3.write(6, 0);
-                cm_sketch2_r3.write(7, 0);
-                cm_sketch2_r3.write(8, 0);
-                cm_sketch2_r3.write(9, 0);
-                */
-            }
-
-            // Self Query & Report reward interval (t3 ~ t3')
-            else if (t_diff > 20000000 && t_diff < 20010000 ){
-
-                bit<1> has_lp_2 = 1;
-                heavy_tuple ha_tuple_2;
-                bit<32> hp_est_2 = 0;
-                bit<32> lp_est_2 = 0;
-                bit<32> est_2 = 0;
-                bit<32> new_r1;
-                bit<32> new_r2;
-                bit<32> new_r3;
-                bit<32> new_min_cnt;
+                    cm_sketch1_r1.write(meta.ha_r1, meta.qc_r1+meta.flow_cnt);
+                    cm_sketch1_r2.write(meta.ha_r2, meta.qc_r2+meta.flow_cnt);
+                    cm_sketch1_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);
 
 
-                bit<1> has_lp_1 = 1;
-                heavy_tuple ha_tuple_1;
-                bit<32> hp_est_1 = 0;
-                bit<32> lp_est_1 = 0;
-                bit<32> est_1 = 0;
-                bit<32> old_r1;
-                bit<32> old_r2;
-                bit<32> old_r3;
-                bit<32> old_min_cnt;
-                /**** Query Elastic Sketch 2 ****/
-                heavy_counters_flowID_2.read(ha_tuple_2.flowID, meta.ha_heavy);
-                heavy_counters_p_vote_2.read(ha_tuple_2.p_vote, meta.ha_heavy);
-                heavy_counters_flag_2.read(ha_tuple_2.flag, meta.ha_heavy);
-                heavy_counters_total_vote_2.read(ha_tuple_2.total_vote, meta.ha_heavy);
 
-                // Query heavy part
-                if(ha_tuple_2.flowID == meta.flowID) {
-                    // the counter is for `flowID`. 
-                    // read the positive vote to heavy part estimation.
-                    // set light part to false
-                    hp_est_2 = ha_tuple_2.p_vote;
-                    has_lp_2 = 1w0;
 
-                    if(ha_tuple_2.flag == 1w1) {
-                        // the counter has changed the `flowID`.
-                        // need to query light part
-                        has_lp_2 = 1w1;
+                    // Query S4-S3 if necessary
+                    if(q_flag==1){
+                        bit<2> index_1;
+                        bit<2> index_2;
+                        bit<2> index_3;
+
+                        mask_queried_1.read(index_1, meta.ha_r1);
+                        mask_queried_1.read(index_2, meta.ha_r2);
+                        mask_queried_1.read(index_3, meta.ha_r3);
+
+                        // Never Queried before
+                        if(index_1!=1 ||  index_2!=1 || index_3!=1){
+
+                            bit<32> old_1;
+                            bit<32> old_2;
+                            bit<32> old_3;
+                            bit<32> old_est;
+
+                            bit<32> new_1;
+                            bit<32> new_2;
+                            bit<32> new_3;
+                            bit<32> new_est;
+
+                            cm_sketch3_r1.read(old_1, meta.ha_r1);
+                            cm_sketch3_r2.read(old_2, meta.ha_r2);
+                            cm_sketch3_r3.read(old_3, meta.ha_r3);
+                            min_cnt(old_est, old_1, old_2, old_3);
+
+                            cm_sketch4_r1.read(new_1, meta.ha_r1);
+                            cm_sketch4_r2.read(new_2, meta.ha_r2);
+                            cm_sketch4_r3.read(new_3, meta.ha_r3);
+                            min_cnt(new_est, new_1, new_2, new_3);
+
+                            if(new_est > old_est + 50){
+                                mask_queried_1.write(meta.ha_r1, 1);
+                                mask_queried_1.write(meta.ha_r2, 1);
+                                mask_queried_1.write(meta.ha_r3, 1);
+                                standard_metadata.egress_spec = 255;
+                                meta.sign = 0;
+                                meta.time_interval = 20000000;
+                                meta.flow_size_1 = old_est;
+                                meta.flow_size_2 = new_est;
+                            }
+
+                            if(old_est > new_est + 50){
+                                mask_queried_1.write(meta.ha_r1, 1);
+                                mask_queried_1.write(meta.ha_r2, 1);
+                                mask_queried_1.write(meta.ha_r3, 1);
+                                standard_metadata.egress_spec = 255;
+                                meta.sign = 1;
+                                meta.time_interval = 20000000;
+                                meta.flow_size_1 = old_est;
+                                meta.flow_size_2 = new_est;
+                            }
+
+                        }
+
+
                     }
-                }
-                // Query light part
-                if(has_lp_2==1){
-                    cm_sketch2_r1.read(lp_est_2, meta.ha_r1);
-  
-                }
-                est_2 = hp_est_2 + lp_est_2;
-                //cm_sketch2_r1.read(new_r1, meta.ha_r1);
-                //cm_sketch2_r2.read(new_r2, meta.ha_r2);
-                //cm_sketch2_r3.read(new_r3, meta.ha_r3);
-                //min_cnt(new_min_cnt, new_r1, new_r2, new_r3);
+                    // transition to phase 2
+                    if(t_diff>10000000){
+                        time_flag.write(0, 1);
+                        last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
 
-
-                /**** Query Elastic Sketch 1 ****/
-                heavy_counters_flowID_1.read(ha_tuple_1.flowID, meta.ha_heavy);
-                heavy_counters_p_vote_1.read(ha_tuple_1.p_vote, meta.ha_heavy);
-                heavy_counters_flag_1.read(ha_tuple_1.flag, meta.ha_heavy);
-                heavy_counters_total_vote_1.read(ha_tuple_1.total_vote, meta.ha_heavy);
-
-                // Query heavy part
-                if(ha_tuple_1.flowID == meta.flowID) {
-                    // the counter is for `flowID`. 
-                    // read the positive vote to heavy part estimation.
-                    // set light part to false
-                    hp_est_1 = ha_tuple_1.p_vote;
-                    has_lp_1 = 1w0;
-
-                    if(ha_tuple_1.flag == 1w1) {
-                        // the counter has changed the `flowID`.
-                        // need to query light part
-                        has_lp_1 = 1w1;
                     }
-                }
-                // Query light part
-                if(has_lp_1==1){
-                    cm_sketch1_r1.read(lp_est_1, meta.ha_r1);
-  
-                }
-                est_1 = hp_est_1 + lp_est_1;
-                //cm_sketch1_r1.read(old_r1, meta.ha_r1);
-                //cm_sketch1_r2.read(old_r2, meta.ha_r2);
-                //cm_sketch1_r3.read(old_r3, meta.ha_r3);
-                //min_cnt(old_min_cnt, old_r1, old_r2, old_r3);
-                
-                // flow decrease
-                if(est_1 > est_2 + 50){
-                    standard_metadata.egress_spec = 255;
-                    meta.sign = 1;
-                    meta.time_interval = 20000000;
-                    meta.flow_size_1 = est_1;
-                    meta.flow_size_2 = est_2;
+
                 }
 
-                // flow rate increase
-                if(est_2 > est_1+50){
-                    standard_metadata.egress_spec = 255;
-                    meta.sign = 0;
-                    meta.time_interval = 20000000;
-                    meta.flow_size_1 = est_1;
-                    meta.flow_size_2 = est_2;
-                }
-                // flow rate decrease
-                /*
-                if(old_r1 > new_r1 + 50){
-                    standard_metadata.egress_spec = 255;
-                    meta.sign = 1;
-                    meta.time_interval = 20000000;
-                    meta.flow_size_1 = old_r1;
-                    meta.flow_size_2 = new_r1;
-                }
+                // Phase 2
+                // 1. Process packet & store packet counter into sketch 2 (CM sketch)
+                // 2. Reset Sketch 3 to 0
+                // 3. Query Sketch 1 & Sketch 4 ( S1[i] - S4[i] ), for any flow "i"
+                // 4. Transition to Phase 3
 
-                // flow rate increase
-                if(new_r1 > old_r1+50){
-                    standard_metadata.egress_spec = 255;
-                    meta.sign = 0;
-                    meta.time_interval = 20000000;
-                    meta.flow_size_1 = old_r1;
-                    meta.flow_size_2 = new_r1;
-                }
-                */
-                //old_cms_estimate.write(0, old_min_cnt);
-                //new_cms_estimate.write(0, new_min_cnt);
-
-                //old_cm_sketch_r1.write(meta.ha_r1, new_r1);
-                //old_cm_sketch_r2.write(meta.ha_r2, new_r2);
-                //old_cm_sketch_r3.write(meta.ha_r3, new_r3);
-
-                //new_cm_sketch_r1.write(meta.ha_r1, new_r1 - new_min_cnt);
-                //new_cm_sketch_r2.write(meta.ha_r2, new_r2 - new_min_cnt);
-                //new_cm_sketch_r3.write(meta.ha_r3, new_r3 - new_min_cnt);
-
-            }
-            // Interval 1
-            else if (t_diff < 10000000){
-
-                /**** heavy part process ****/
-                heavy_part_init_1();
-                bit<1> is_heavy_processed = 0;
-
-                // f == f
-                if(meta.ha_tuple.flowID == meta.flowID){
-                    heavy_counters_p_vote_1.write(meta.ha_heavy, meta.ha_tuple.p_vote + meta.flow_cnt);
-                    is_heavy_processed = 1;
-                }
-
-                // f = empty
-                if(meta.ha_tuple.flowID == IDLE_HEAVY_COUNTER_FLOWID){
-                    // hashed counter in heavy part is idle
-                    heavy_counters_flowID_1.write(meta.ha_heavy, meta.flowID);
-                    heavy_counters_p_vote_1.write(meta.ha_heavy, 32w1);
-                    heavy_counters_flag_1.write(meta.ha_heavy, 1w0);
-
-                    is_heavy_processed = 1w1;
-                }
-            
-                heavy_counters_total_vote_1.write(meta.ha_heavy, meta.ha_tuple.total_vote + 1);
-                heavy_part_init_1();
-
-                if (meta.ha_tuple.p_vote * EVICT_THRESHOLD <= meta.ha_tuple.total_vote) {
-                    // evict the current 'heavy' flow
-                    is_heavy_processed = 1w0;
-
-                    // exchange the value of 'current heavy flow' and 'new flow'
-                    bit<72> tmp_flowID = meta.ha_tuple.flowID;
-                    bit<32> tmp_p_vote = meta.ha_tuple.p_vote;
-
-                    heavy_counters_flowID_1.write(meta.ha_heavy, meta.flowID);
-                    heavy_counters_p_vote_1.write(meta.ha_heavy, 32w1);
-                    heavy_counters_flag_1.write(meta.ha_heavy, 1w1);
-                    heavy_counters_total_vote_1.write(meta.ha_heavy, 32w1);
-
-                    // set the 'evicted flow' in meta, for insertion in CMS
-                    meta.flowID = tmp_flowID;
-                    meta.flow_cnt = tmp_p_vote;
-
-                    // reload counters into meta
-                    heavy_part_init_1();
-                }
+                else if (flag==1){
 
 
-                /**** light part process ****/
-                if(is_heavy_processed == 0){
-                    cm_sketch1_r1.read(meta.qc_r1, meta.ha_r1);
-                    cm_sketch1_r1.write(meta.ha_r1, meta.qc_r1 + meta.flow_cnt);
-                }
-
-
-                //cm_sketch1_r1.read(meta.qc_r1, meta.ha_r1);
-                //cm_sketch1_r2.read(meta.qc_r2, meta.ha_r2);
-                //cm_sketch1_r3.read(meta.qc_r3, meta.ha_r3);
-
-
-                //min_cnt(meta.cms_freq_estimate, meta.qc_r1, meta.qc_r2, meta.qc_r3);
-                //cms_estimate.write(0, meta.cms_freq_estimate);
-                //cur_timestamp.write(0, standard_metadata.ingress_global_timestamp);
-
-                //cm_sketch1_r1.write(meta.ha_r1, meta.qc_r1 + meta.flow_cnt);
-                //cm_sketch1_r2.write(meta.ha_r2, meta.qc_r2 + meta.flow_cnt);
-                //cm_sketch1_r3.write(meta.ha_r3, meta.qc_r3 + meta.flow_cnt);
-
-
-            }
-
-            // Interval 2
-            else if (t_diff > 10000000 && t_diff < 20000000){
-
-                /**** heavy part process ****/
-                heavy_part_init_2();
-                bit<1> is_heavy_processed = 0;
-
-                // f == f
-                if(meta.ha_tuple.flowID == meta.flowID){
-                    heavy_counters_p_vote_2.write(meta.ha_heavy, meta.ha_tuple.p_vote + meta.flow_cnt);
-                    is_heavy_processed = 1;
-                }
-
-                // f = empty
-                if(meta.ha_tuple.flowID == IDLE_HEAVY_COUNTER_FLOWID){
-                    // hashed counter in heavy part is idle
-                    heavy_counters_flowID_2.write(meta.ha_heavy, meta.flowID);
-                    heavy_counters_p_vote_2.write(meta.ha_heavy, 32w1);
-                    heavy_counters_flag_2.write(meta.ha_heavy, 1w0);
-
-                    is_heavy_processed = 1w1;
-                }
-            
-                heavy_counters_total_vote_2.write(meta.ha_heavy, meta.ha_tuple.total_vote + 1);
-                heavy_part_init_2();
-
-                if (meta.ha_tuple.p_vote * EVICT_THRESHOLD <= meta.ha_tuple.total_vote) {
-                    // evict the current 'heavy' flow
-                    is_heavy_processed = 1w0;
-
-                    // exchange the value of 'current heavy flow' and 'new flow'
-                    bit<72> tmp_flowID = meta.ha_tuple.flowID;
-                    bit<32> tmp_p_vote = meta.ha_tuple.p_vote;
-
-                    heavy_counters_flowID_2.write(meta.ha_heavy, meta.flowID);
-                    heavy_counters_p_vote_2.write(meta.ha_heavy, 32w1);
-                    heavy_counters_flag_2.write(meta.ha_heavy, 1w1);
-                    heavy_counters_total_vote_2.write(meta.ha_heavy, 32w1);
-
-                    // set the 'evicted flow' in meta, for insertion in CMS
-                    meta.flowID = tmp_flowID;
-                    meta.flow_cnt = tmp_p_vote;
-
-                    // reload counters into meta
-                    heavy_part_init_1();
-                }
-
-
-                /**** light part process ****/
-                if(is_heavy_processed == 0){
+                    // Process packet in S2
                     cm_sketch2_r1.read(meta.qc_r1, meta.ha_r1);
-                    cm_sketch2_r1.write(meta.ha_r1, meta.qc_r1 + meta.flow_cnt);
+                    cm_sketch2_r2.read(meta.qc_r2, meta.ha_r2);
+                    cm_sketch2_r3.read(meta.qc_r3, meta.ha_r3);
+
+                    cm_sketch2_r1.write(meta.ha_r1, meta.qc_r1+meta.flow_cnt);
+                    cm_sketch2_r2.write(meta.ha_r2, meta.qc_r2+meta.flow_cnt);
+                    cm_sketch2_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);
+
+
+                    // Query S1-S4 if necessary
+                    if(q_flag==1){
+                        bit<2> index_1;
+                        bit<2> index_2;
+                        bit<2> index_3;
+
+                        mask_queried_2.read(index_1, meta.ha_r1);
+                        mask_queried_2.read(index_2, meta.ha_r2);
+                        mask_queried_2.read(index_3, meta.ha_r3);
+
+                        // Never Queried before
+                        if(index_1!=1 ||  index_2!=1 || index_3!=1){
+
+                            bit<32> old_1;
+                            bit<32> old_2;
+                            bit<32> old_3;
+                            bit<32> old_est;
+
+                            bit<32> new_1;
+                            bit<32> new_2;
+                            bit<32> new_3;
+                            bit<32> new_est;
+
+                            cm_sketch4_r1.read(old_1, meta.ha_r1);
+                            cm_sketch4_r2.read(old_2, meta.ha_r2);
+                            cm_sketch4_r3.read(old_3, meta.ha_r3);
+                            min_cnt(old_est, old_1, old_2, old_3);
+
+                            cm_sketch1_r1.read(new_1, meta.ha_r1);
+                            cm_sketch1_r2.read(new_2, meta.ha_r2);
+                            cm_sketch1_r3.read(new_3, meta.ha_r3);
+                            min_cnt(new_est, new_1, new_2, new_3);
+
+                            if(new_est > old_est + 50){
+                                mask_queried_2.write(meta.ha_r1, 1);
+                                mask_queried_2.write(meta.ha_r2, 1);
+                                mask_queried_2.write(meta.ha_r3, 1);
+                                standard_metadata.egress_spec = 255;
+                                meta.sign = 0;
+                                meta.time_interval = 20000000;
+                                meta.flow_size_1 = old_est;
+                                meta.flow_size_2 = new_est;
+                            }
+
+                            if(old_est > new_est + 50){
+                                mask_queried_2.write(meta.ha_r1, 1);
+                                mask_queried_2.write(meta.ha_r2, 1);
+                                mask_queried_2.write(meta.ha_r3, 1);
+                                standard_metadata.egress_spec = 255;
+                                meta.sign = 1;
+                                meta.time_interval = 20000000;
+                                meta.flow_size_1 = old_est;
+                                meta.flow_size_2 = new_est;
+                            }
+
+                        }
+                    }
+
+                    // transition to phase 3
+                    if(t_diff>10000000){
+                        time_flag.write(0, 2);
+                        last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
+
+                        query_flag.write(0, 1);
+                    }                
+
+
                 }
-                
-                //cm_sketch2_r1.read(meta.qc_r1, meta.ha_r1);
-                //cm_sketch2_r2.read(meta.qc_r2, meta.ha_r2);
-                //cm_sketch2_r3.read(meta.qc_r3, meta.ha_r3);
 
+                // Phase 3
+                // 1. Process packet & store packet counter into sketch 3 (CM sketch)
+                // 2. Reset Sketch 4 to 0
+                // 3. Query Sketch 2 & Sketch 1 ( S2[i] - S1[i] ), for any flow "i"
+                // 4. Transition to Phase 4
+                else if(flag==2){
 
-                //min_cnt(meta.cms_freq_estimate, meta.qc_r1, meta.qc_r2, meta.qc_r3);
-                //cur_timestamp.write(0, standard_metadata.ingress_global_timestamp);
-                //cms_estimate.write(0, meta.cms_freq_estimate);
+                    // Process packet in S3
+                    cm_sketch3_r1.read(meta.qc_r1, meta.ha_r1);
+                    cm_sketch3_r2.read(meta.qc_r2, meta.ha_r2);
+                    cm_sketch3_r3.read(meta.qc_r3, meta.ha_r3);
 
-                //cm_sketch2_r1.write(meta.ha_r1, meta.qc_r1 + meta.flow_cnt);
-                //cm_sketch2_r2.write(meta.ha_r2, meta.qc_r2 + meta.flow_cnt);
-                //cm_sketch2_r3.write(meta.ha_r3, meta.qc_r3 + meta.flow_cnt);
+                    cm_sketch3_r1.write(meta.ha_r1, meta.qc_r1+meta.flow_cnt);
+                    cm_sketch3_r2.write(meta.ha_r2, meta.qc_r2+meta.flow_cnt);
+                    cm_sketch3_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);                
 
+                    // Query S2-S1 if necessary
+                    if(q_flag==1){
+                        bit<2> index_1;
+                        bit<2> index_2;
+                        bit<2> index_3;
 
+                        mask_queried_1.read(index_1, meta.ha_r1);
+                        mask_queried_1.read(index_2, meta.ha_r2);
+                        mask_queried_1.read(index_3, meta.ha_r3);
+
+                        // Never Queried before
+                        if(index_1!=1 ||  index_2!=1 || index_3!=1){
+
+                            bit<32> old_1;
+                            bit<32> old_2;
+                            bit<32> old_3;
+                            bit<32> old_est;
+
+                            bit<32> new_1;
+                            bit<32> new_2;
+                            bit<32> new_3;
+                            bit<32> new_est;
+
+                            cm_sketch1_r1.read(old_1, meta.ha_r1);
+                            cm_sketch1_r2.read(old_2, meta.ha_r2);
+                            cm_sketch1_r3.read(old_3, meta.ha_r3);
+                            min_cnt(old_est, old_1, old_2, old_3);
+
+                            cm_sketch2_r1.read(new_1, meta.ha_r1);
+                            cm_sketch2_r2.read(new_2, meta.ha_r2);
+                            cm_sketch2_r3.read(new_3, meta.ha_r3);
+                            min_cnt(new_est, new_1, new_2, new_3);
+
+                            if(new_est > old_est + 50){
+                                mask_queried_1.write(meta.ha_r1, 1);
+                                mask_queried_1.write(meta.ha_r2, 1);
+                                mask_queried_1.write(meta.ha_r3, 1);
+                                standard_metadata.egress_spec = 255;
+                                meta.sign = 0;
+                                meta.time_interval = 20000000;
+                                meta.flow_size_1 = old_est;
+                                meta.flow_size_2 = new_est;
+                            }
+
+                            if(old_est > new_est + 50){
+                                mask_queried_1.write(meta.ha_r1, 1);
+                                mask_queried_1.write(meta.ha_r2, 1);
+                                mask_queried_1.write(meta.ha_r3, 1);
+                                standard_metadata.egress_spec = 255;
+                                meta.sign = 1;
+                                meta.time_interval = 20000000;
+                                meta.flow_size_1 = old_est;
+                                meta.flow_size_2 = new_est;
+                            }
+
+                        }
+                    }
+                    // transition to phase 4
+                    if(t_diff>10000000){
+                        time_flag.write(0, 3);
+                        last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
+
+                    }
+                }
+
+                // Phase 4
+                // 1. Process packet & store packet counter into sketch 4 (CM sketch)
+                // 2. Reset Sketch 1 to 0
+                // 3. Query Sketch 3 & Sketch 2 ( S3[i] - S2[i] ), for any flow "i"
+                // 4. Transition to Phase 1            
+                else if(flag==3){
+
+                    // Process packet in S4
+                    cm_sketch4_r1.read(meta.qc_r1, meta.ha_r1);
+                    cm_sketch4_r2.read(meta.qc_r2, meta.ha_r2);
+                    cm_sketch4_r3.read(meta.qc_r3, meta.ha_r3);
+
+                    cm_sketch4_r1.write(meta.ha_r1, meta.qc_r1+meta.flow_cnt);
+                    cm_sketch4_r2.write(meta.ha_r2, meta.qc_r2+meta.flow_cnt);
+                    cm_sketch4_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);
+   
+
+                    // Query S3-S2 if necessary
+                    if(q_flag==1){
+                        bit<2> index_1;
+                        bit<2> index_2;
+                        bit<2> index_3;
+
+                        mask_queried_2.read(index_1, meta.ha_r1);
+                        mask_queried_2.read(index_2, meta.ha_r2);
+                        mask_queried_2.read(index_3, meta.ha_r3);
+
+                        // Never Queried before
+                        if(index_1!=1 ||  index_2!=1 || index_3!=1){
+
+                            bit<32> old_1;
+                            bit<32> old_2;
+                            bit<32> old_3;
+                            bit<32> old_est;
+
+                            bit<32> new_1;
+                            bit<32> new_2;
+                            bit<32> new_3;
+                            bit<32> new_est;
+
+                            cm_sketch2_r1.read(old_1, meta.ha_r1);
+                            cm_sketch2_r2.read(old_2, meta.ha_r2);
+                            cm_sketch2_r3.read(old_3, meta.ha_r3);
+                            min_cnt(old_est, old_1, old_2, old_3);
+
+                            cm_sketch3_r1.read(new_1, meta.ha_r1);
+                            cm_sketch3_r2.read(new_2, meta.ha_r2);
+                            cm_sketch3_r3.read(new_3, meta.ha_r3);
+                            min_cnt(new_est, new_1, new_2, new_3);
+
+                            if(new_est > old_est + 50){
+                                mask_queried_2.write(meta.ha_r1, 1);
+                                mask_queried_2.write(meta.ha_r2, 1);
+                                mask_queried_2.write(meta.ha_r3, 1);
+                                standard_metadata.egress_spec = 255;
+                                meta.sign = 0;
+                                meta.time_interval = 20000000;
+                                meta.flow_size_1 = old_est;
+                                meta.flow_size_2 = new_est;
+                            }
+
+                            if(old_est > new_est + 50){
+                                mask_queried_2.write(meta.ha_r1, 1);
+                                mask_queried_2.write(meta.ha_r2, 1);
+                                mask_queried_2.write(meta.ha_r3, 1);
+                                standard_metadata.egress_spec = 255;
+                                meta.sign = 1;
+                                meta.time_interval = 20000000;
+                                meta.flow_size_1 = old_est;
+                                meta.flow_size_2 = new_est;
+                            }
+
+                        }
+                    }
+                    // transition to phase 2
+                    if(t_diff>10000000){
+                        time_flag.write(0, 0);
+                        last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
+
+                    }
+                }
             }
     }
-
 }
 control packetio_ingress(inout headers hdr,
                          inout standard_metadata_t standard_metadata) {

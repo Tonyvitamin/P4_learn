@@ -5,6 +5,7 @@ import os
 import sys
 import time
 from time import sleep
+import threading 
 
 import google.protobuf.text_format
 import grpc
@@ -26,7 +27,56 @@ import p4runtime_lib.helper
 SWITCH_TO_HOST_PORT = 1
 SWITCH_TO_SWITCH_PORT = 2
 
+def reset_sketch():
+    while True:
+        sleep(1)
+        flag = 0
+        prev_flag = -1
+        count=0
+        os.system('echo register_read time_flag 0 | simple_switch_CLI --thrift-port 9090  | grep [0] | awk \'{print $3}\' > s1_time_flag.txt &')
+        with open('s1_time_flag.txt') as f:
+            for line in f:
+                flag = int(line)
 
+        if flag==0 and prev_flag!=flag:
+            os.system('echo register_reset cm_sketch2_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
+            os.system('echo register_reset cm_sketch2_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
+            os.system('echo register_reset cm_sketch2_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')
+            os.system('echo register_reset mask_queried_2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
+            prev_flag = flag
+            count=0
+
+        elif flag==1 and prev_flag!=flag:
+            os.system('echo register_reset cm_sketch3_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
+            os.system('echo register_reset cm_sketch3_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
+            os.system('echo register_reset cm_sketch3_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')
+            os.system('echo register_reset mask_queried_1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
+            prev_flag = flag
+            count=0
+            
+        elif flag==2 and prev_flag!=flag:
+            os.system('echo register_reset cm_sketch4_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
+            os.system('echo register_reset cm_sketch4_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
+            os.system('echo register_reset cm_sketch4_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')
+            os.system('echo register_reset mask_queried_2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
+            prev_flag = flag
+            count=0
+            
+        elif flag==3 and prev_flag!=flag:
+            os.system('echo register_reset cm_sketch1_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
+            os.system('echo register_reset cm_sketch1_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
+            os.system('echo register_reset cm_sketch1_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')            
+            os.system('echo register_reset mask_queried_1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
+            prev_flag = flag
+            count=0
+            
+        else:
+            count++
+            
+            
+            
+            
+            
 def writeforwardRules(p4info_helper, ingress_sw):
     """
     Installs three rules:
@@ -182,9 +232,12 @@ def main(p4info_file_path, bmv2_file_path):
         readTableRules(p4info_helper, s1)
         # Print the tunnel counters every 2 seconds
         num = 0
+        t1 = threading.Thread(target=reset_sketch)
+        t1.start()
         while True:
 
-            sleep(2)
+
+            
             packetin = s1.PacketIn()
             if packetin:
                 print '\n----- Packet in -----'

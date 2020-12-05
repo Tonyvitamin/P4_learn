@@ -36,16 +36,9 @@ actions {
 }
 actions {
   preamble {
-    id: 16805506
-    name: "MyIngress.Measurement.heavy_part_init_1"
-    alias: "heavy_part_init_1"
-  }
-}
-actions {
-  preamble {
-    id: 16807112
-    name: "MyIngress.Measurement.heavy_part_init_2"
-    alias: "heavy_part_init_2"
+    id: 16783353
+    name: "MyIngress.Measurement.min_cnt"
+    alias: "min_cnt"
   }
 }
 actions {
@@ -137,66 +130,6 @@ controller_packet_metadata {
 }
 registers {
   preamble {
-    id: 369130256
-    name: "MyIngress.Measurement.heavy_counters_flowID_1"
-    alias: "heavy_counters_flowID_1"
-  }
-  type_spec {
-    bitstring {
-      bit {
-        bitwidth: 72
-      }
-    }
-  }
-  size: 10
-}
-registers {
-  preamble {
-    id: 369143556
-    name: "MyIngress.Measurement.heavy_counters_p_vote_1"
-    alias: "heavy_counters_p_vote_1"
-  }
-  type_spec {
-    bitstring {
-      bit {
-        bitwidth: 32
-      }
-    }
-  }
-  size: 10
-}
-registers {
-  preamble {
-    id: 369112231
-    name: "MyIngress.Measurement.heavy_counters_flag_1"
-    alias: "heavy_counters_flag_1"
-  }
-  type_spec {
-    bitstring {
-      bit {
-        bitwidth: 1
-      }
-    }
-  }
-  size: 10
-}
-registers {
-  preamble {
-    id: 369137891
-    name: "MyIngress.Measurement.heavy_counters_total_vote_1"
-    alias: "heavy_counters_total_vote_1"
-  }
-  type_spec {
-    bitstring {
-      bit {
-        bitwidth: 32
-      }
-    }
-  }
-  size: 10
-}
-registers {
-  preamble {
     id: 369123168
     name: "MyIngress.Measurement.cm_sketch1_r1"
     alias: "cm_sketch1_r1"
@@ -212,24 +145,9 @@ registers {
 }
 registers {
   preamble {
-    id: 369140096
-    name: "MyIngress.Measurement.heavy_counters_flowID_2"
-    alias: "heavy_counters_flowID_2"
-  }
-  type_spec {
-    bitstring {
-      bit {
-        bitwidth: 72
-      }
-    }
-  }
-  size: 10
-}
-registers {
-  preamble {
-    id: 369126388
-    name: "MyIngress.Measurement.heavy_counters_p_vote_2"
-    alias: "heavy_counters_p_vote_2"
+    id: 369124252
+    name: "MyIngress.Measurement.cm_sketch1_r2"
+    alias: "cm_sketch1_r2"
   }
   type_spec {
     bitstring {
@@ -242,24 +160,9 @@ registers {
 }
 registers {
   preamble {
-    id: 369131910
-    name: "MyIngress.Measurement.heavy_counters_flag_2"
-    alias: "heavy_counters_flag_2"
-  }
-  type_spec {
-    bitstring {
-      bit {
-        bitwidth: 1
-      }
-    }
-  }
-  size: 10
-}
-registers {
-  preamble {
-    id: 369144925
-    name: "MyIngress.Measurement.heavy_counters_total_vote_2"
-    alias: "heavy_counters_total_vote_2"
+    id: 369131545
+    name: "MyIngress.Measurement.cm_sketch1_r3"
+    alias: "cm_sketch1_r3"
   }
   type_spec {
     bitstring {
@@ -280,6 +183,156 @@ registers {
     bitstring {
       bit {
         bitwidth: 32
+      }
+    }
+  }
+  size: 10
+}
+registers {
+  preamble {
+    id: 369142745
+    name: "MyIngress.Measurement.cm_sketch2_r2"
+    alias: "cm_sketch2_r2"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 32
+      }
+    }
+  }
+  size: 10
+}
+registers {
+  preamble {
+    id: 369155694
+    name: "MyIngress.Measurement.cm_sketch2_r3"
+    alias: "cm_sketch2_r3"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 32
+      }
+    }
+  }
+  size: 10
+}
+registers {
+  preamble {
+    id: 369099944
+    name: "MyIngress.Measurement.cm_sketch3_r1"
+    alias: "cm_sketch3_r1"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 32
+      }
+    }
+  }
+  size: 10
+}
+registers {
+  preamble {
+    id: 369139749
+    name: "MyIngress.Measurement.cm_sketch3_r2"
+    alias: "cm_sketch3_r2"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 32
+      }
+    }
+  }
+  size: 10
+}
+registers {
+  preamble {
+    id: 369151055
+    name: "MyIngress.Measurement.cm_sketch3_r3"
+    alias: "cm_sketch3_r3"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 32
+      }
+    }
+  }
+  size: 10
+}
+registers {
+  preamble {
+    id: 369119878
+    name: "MyIngress.Measurement.cm_sketch4_r1"
+    alias: "cm_sketch4_r1"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 32
+      }
+    }
+  }
+  size: 10
+}
+registers {
+  preamble {
+    id: 369114368
+    name: "MyIngress.Measurement.cm_sketch4_r2"
+    alias: "cm_sketch4_r2"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 32
+      }
+    }
+  }
+  size: 10
+}
+registers {
+  preamble {
+    id: 369148614
+    name: "MyIngress.Measurement.cm_sketch4_r3"
+    alias: "cm_sketch4_r3"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 32
+      }
+    }
+  }
+  size: 10
+}
+registers {
+  preamble {
+    id: 369151070
+    name: "MyIngress.Measurement.mask_queried_1"
+    alias: "mask_queried_1"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 2
+      }
+    }
+  }
+  size: 10
+}
+registers {
+  preamble {
+    id: 369142013
+    name: "MyIngress.Measurement.mask_queried_2"
+    alias: "mask_queried_2"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 2
       }
     }
   }
@@ -310,6 +363,36 @@ registers {
     bitstring {
       bit {
         bitwidth: 48
+      }
+    }
+  }
+  size: 1
+}
+registers {
+  preamble {
+    id: 369099203
+    name: "MyIngress.Measurement.time_flag"
+    alias: "time_flag"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 8
+      }
+    }
+  }
+  size: 1
+}
+registers {
+  preamble {
+    id: 369151727
+    name: "MyIngress.Measurement.query_flag"
+    alias: "query_flag"
+  }
+  type_spec {
+    bitstring {
+      bit {
+        bitwidth: 2
       }
     }
   }
