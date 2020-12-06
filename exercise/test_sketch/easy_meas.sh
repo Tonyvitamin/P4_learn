@@ -1,9 +1,9 @@
 #!/bin/sh
 
 
-/bin/bash ./reset_switch.sh
+#/bin/bash ./reset_switch.sh
 rm s1_timestamp.txt s1_estimate.txt
-for interval in $(seq 1 300)
+for interval in $(seq 1 1000000)
 do 
     /bin/bash ./s1_read_timestamp.sh  | sed '1,3d' | sed '2,5d'  >> s1_timestamp.txt
     #echo register_read  cur_timestamp | simple_switch_CLI --thrift-port 9090
@@ -21,5 +21,7 @@ do
     #echo register_read  old_cms_estimate | simple_switch_CLI --thrift-port 9091
     #echo register_read  new_cms_estimate | simple_switch_CLI --thrift-port 9091
 
-    #sleep 1
+    echo $interval 
+    echo "\n"
+    sleep 1
 done
