@@ -1,2595 +1,297 @@
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 58192115
+RuntimeCmd: last_timestamp= 56376058
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 58192115
+RuntimeCmd: last_timestamp= 56376058
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 58192115
+RuntimeCmd: last_timestamp= 56376058
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 113065106
+RuntimeCmd: last_timestamp= 112081745
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 115013746
+RuntimeCmd: last_timestamp= 112081745
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 116928973
+RuntimeCmd: last_timestamp= 112081745
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 118872372
+RuntimeCmd: last_timestamp= 117082135
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 120777932
+RuntimeCmd: last_timestamp= 117082135
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 122739456
+RuntimeCmd: last_timestamp= 122082644
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 124671177
+RuntimeCmd: last_timestamp= 122082644
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 126569493
+RuntimeCmd: last_timestamp= 122082644
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 128450427
+RuntimeCmd: last_timestamp= 127083134
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 130368823
+RuntimeCmd: last_timestamp= 127083134
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 132285621
+RuntimeCmd: last_timestamp= 132083609
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 134243963
+RuntimeCmd: last_timestamp= 132083609
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 136169618
+RuntimeCmd: last_timestamp= 132083609
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 138066297
+RuntimeCmd: last_timestamp= 137084101
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 140013763
+RuntimeCmd: last_timestamp= 137084101
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 141872880
+RuntimeCmd: last_timestamp= 137084101
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 70065955
-RuntimeCmd: last_timestamp= 68765711
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 71977124
-RuntimeCmd: last_timestamp= 68765711
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 73854430
-RuntimeCmd: last_timestamp= 73766101
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 75741373
-RuntimeCmd: last_timestamp= 73766101
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 77670711
-RuntimeCmd: last_timestamp= 73766101
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 79577013
-RuntimeCmd: last_timestamp= 78766579
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 81472502
-RuntimeCmd: last_timestamp= 78766579
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 83432035
-RuntimeCmd: last_timestamp= 78766579
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 85390350
-RuntimeCmd: last_timestamp= 83767096
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 87287030
-RuntimeCmd: last_timestamp= 83767096
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 89219941
-RuntimeCmd: last_timestamp= 88767579
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 91146838
-RuntimeCmd: last_timestamp= 88767579
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 93068889
-RuntimeCmd: last_timestamp= 88767579
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 94949878
-RuntimeCmd: last_timestamp= 93768039
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 96863443
-RuntimeCmd: last_timestamp= 93768039
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98809681
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 98873213
-RuntimeCmd: last_timestamp= 98768530
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 186152911
-RuntimeCmd: last_timestamp= 185080074
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 188058023
-RuntimeCmd: last_timestamp= 185080074
+RuntimeCmd: cur_timestamp= 142473279
+RuntimeCmd: last_timestamp= 142084563
 RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 189949843
-RuntimeCmd: last_timestamp= 185080074
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 191857351
-RuntimeCmd: last_timestamp= 190080480
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 193735859
-RuntimeCmd: last_timestamp= 190080480
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 195620443
-RuntimeCmd: last_timestamp= 195080934
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 197513466
-RuntimeCmd: last_timestamp= 195080934
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 199381061
-RuntimeCmd: last_timestamp= 195080934
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 201281344
-RuntimeCmd: last_timestamp= 200081449
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 203173161
-RuntimeCmd: last_timestamp= 200081449
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 205097663
-RuntimeCmd: last_timestamp= 205081934
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 206977355
-RuntimeCmd: last_timestamp= 206672540
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 208967170
-RuntimeCmd: last_timestamp= 206672540
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 210885565
-RuntimeCmd: last_timestamp= 206672540
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 212796767
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 214728465
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 215180359
-RuntimeCmd: last_timestamp= 211673036
-RuntimeCmd: 
-Make sure the switch is running and that you have the right port
-Make sure the switch is running and that you have the right port
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 28531113
-RuntimeCmd: last_timestamp= 27783652
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 30476122
-RuntimeCmd: last_timestamp= 27783652
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 32405435
-RuntimeCmd: last_timestamp= 27783652
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 34289999
-RuntimeCmd: last_timestamp= 32784062
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 36273776
-RuntimeCmd: last_timestamp= 32784062
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38162255
-RuntimeCmd: last_timestamp= 37784883
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 40161691
-RuntimeCmd: last_timestamp= 37784883
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 42049911
-RuntimeCmd: last_timestamp= 37784883
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 43964729
-RuntimeCmd: last_timestamp= 42785345
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 45898852
-RuntimeCmd: last_timestamp= 42785345
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 47849935
-RuntimeCmd: last_timestamp= 47785828
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 49729627
-RuntimeCmd: last_timestamp= 47785828
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 51660179
-RuntimeCmd: last_timestamp= 47785828
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 53629380
-RuntimeCmd: last_timestamp= 52786313
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 55533293
-RuntimeCmd: last_timestamp= 52786313
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57454133
-RuntimeCmd: last_timestamp= 52786313
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57872463
-RuntimeCmd: last_timestamp= 57786794
-RuntimeCmd: 
-Make sure the switch is running and that you have the right port
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 10426827
-RuntimeCmd: last_timestamp= 8802439
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 12319877
-RuntimeCmd: last_timestamp= 8802439
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 14280665
-RuntimeCmd: last_timestamp= 13802838
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 16180899
-RuntimeCmd: last_timestamp= 13802838
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 18102974
-RuntimeCmd: last_timestamp= 13802838
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 20051666
-RuntimeCmd: last_timestamp= 18803333
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 21995501
-RuntimeCmd: last_timestamp= 18803333
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 23903006
-RuntimeCmd: last_timestamp= 23803822
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 25855322
-RuntimeCmd: last_timestamp= 23803822
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 27872914
-RuntimeCmd: last_timestamp= 23803822
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 29771987
-RuntimeCmd: last_timestamp= 28804331
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 31752131
-RuntimeCmd: last_timestamp= 28804331
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 33681410
-RuntimeCmd: last_timestamp= 28804331
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 35615561
-RuntimeCmd: last_timestamp= 33804791
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 37558146
-RuntimeCmd: last_timestamp= 33804791
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38919763
-RuntimeCmd: last_timestamp= 38805280
-RuntimeCmd: 
-Make sure the switch is running and that you have the right port
-Make sure the switch is running and that you have the right port
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 27890847
-RuntimeCmd: last_timestamp= 26008791
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 29822580
-RuntimeCmd: last_timestamp= 26008791
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 31737379
-RuntimeCmd: last_timestamp= 31009224
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 33692071
-RuntimeCmd: last_timestamp= 31009224
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 35591161
-RuntimeCmd: last_timestamp= 31009224
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 37468437
-RuntimeCmd: last_timestamp= 36009684
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 39372371
-RuntimeCmd: last_timestamp= 36009684
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 41324669
-RuntimeCmd: last_timestamp= 41010204
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 43256369
-RuntimeCmd: last_timestamp= 41010204
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 45132458
-RuntimeCmd: last_timestamp= 41010204
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 47052093
-RuntimeCmd: last_timestamp= 46010659
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 49006838
-RuntimeCmd: last_timestamp= 46010659
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 50944622
-RuntimeCmd: last_timestamp= 46010659
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 52878746
-RuntimeCmd: last_timestamp= 51011169
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 54832238
-RuntimeCmd: last_timestamp= 51011169
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 56127657
-RuntimeCmd: last_timestamp= 56011605
-RuntimeCmd: 
-Make sure the switch is running and that you have the right port
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 0
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 0
-RuntimeCmd: last_timestamp= 26860704
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 28752417
-RuntimeCmd: last_timestamp= 26860704
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 30634553
-RuntimeCmd: last_timestamp= 26860704
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 32520374
-RuntimeCmd: last_timestamp= 31861148
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 34431515
-RuntimeCmd: last_timestamp= 31861148
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 36356532
-RuntimeCmd: last_timestamp= 31861148
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 38260423
-RuntimeCmd: last_timestamp= 36861570
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 40192124
-RuntimeCmd: last_timestamp= 36861570
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 42124557
-RuntimeCmd: last_timestamp= 41862120
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 44022985
-RuntimeCmd: last_timestamp= 41862120
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 45940146
-RuntimeCmd: last_timestamp= 41862120
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 47864130
-RuntimeCmd: last_timestamp= 46862597
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 49794613
-RuntimeCmd: last_timestamp= 46862597
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 51705130
-RuntimeCmd: last_timestamp= 46862597
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 53652581
-RuntimeCmd: last_timestamp= 51863032
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 55558913
-RuntimeCmd: last_timestamp= 51863032
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-RuntimeCmd: last_timestamp= 56863578
-RuntimeCmd: 
-RuntimeCmd: cur_timestamp= 57250536
-Make sure the switch is running and that you have the right port
-Make sure the switch is running and that you have the right port
-Make sure the switch is running and that you have the right port
-Make sure the switch is running and that you have the right port
-Make sure the switch is running and that you have the right port

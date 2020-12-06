@@ -85,7 +85,7 @@ def reset_sketch():
             count+=1
 
 
-        if count >10:
+        if count >2:
             print "flag is ", flag
             count = 0
             os.system('echo register_reset start_flag | simple_switch_CLI --thrift-port 9090 > /dev/null &')
