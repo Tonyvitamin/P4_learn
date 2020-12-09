@@ -30,183 +30,56 @@ SWITCH_TO_SWITCH_PORT = 2
 
 def reset_sketch():
     #sleep(5)
-    os.system('echo register_reset start_flag | simple_switch_CLI --thrift-port 9090 > /dev/null')
+    os.system('./reset.sh')
 
-    #os.system('echo register_reset last_timestamp | simple_switch_CLI --thrift-port 9090 > /dev/null')
-    #os.system('echo register_reset cur_timestamp | simple_switch_CLI --thrift-port 9090 > /dev/null')
-    os.system('echo register_reset cm_sketch2_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-    os.system('echo register_reset cm_sketch2_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-    os.system('echo register_reset cm_sketch2_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-                 
-    os.system('echo register_reset cm_sketch3_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-    os.system('echo register_reset cm_sketch3_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-    os.system('echo register_reset cm_sketch3_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            
-    os.system('echo register_reset cm_sketch4_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-    os.system('echo register_reset cm_sketch4_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-    os.system('echo register_reset cm_sketch4_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-              
-    os.system('echo register_reset cm_sketch1_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-    os.system('echo register_reset cm_sketch1_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-    os.system('echo register_reset cm_sketch1_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')    
-    
-    
-    os.system('echo register_reset cm_sketch5_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-    os.system('echo register_reset cm_sketch5_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-    os.system('echo register_reset cm_sketch5_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-    
-    os.system('echo register_reset mask_queried_1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-    os.system('echo register_reset mask_queried_2 | simple_switch_CLI --thrift-port 9090 > /dev/null')  
-    os.system('echo register_reset mask_queried_3 | simple_switch_CLI --thrift-port 9090 > /dev/null')   
-    os.system('echo register_reset mask_queried_4 | simple_switch_CLI --thrift-port 9090 > /dev/null')   
-    os.system('echo register_reset mask_queried_5 | simple_switch_CLI --thrift-port 9090 > /dev/null')      
     
     print "Reset Sketch all"
     count = 0   
     prev_flag = 0
     flag = 0
     while True:
-        sleep(1)
+        #sleep(4)
         #os.system('echo register_read time_flag 0 | simple_switch_CLI --thrift-port 9090'  )
         #os.system('echo register_read time_flag 0 | simple_switch_CLI --thrift-port 9090  | grep [0] | awk \'{print $3}\'')
         os.system('echo register_read time_flag 0 | simple_switch_CLI --thrift-port 9090  | grep [0] | awk \'{print $3}\' > s1_time_flag.txt &')
-        sleep(4)
+        sleep(1)
         with open('s1_time_flag.txt') as f:
             for line in f:
                 flag = int(line)
         if prev_flag != flag:
             print "Changing phase from ", prev_flag, " to ", flag 
+            
+            if flag == 1:
+                os.system('./reset_state1.sh')
+            if flag == 2:
+                os.system('./reset_state2.sh')
+            if flag == 3:
+                os.system('./reset_state3.sh')
+            if flag == 4:
+                os.system('./reset_state4.sh')
+            if flag == 5:
+                os.system('./reset_state5.sh')
+            
             prev_flag = flag
             count = 0
 
 
         elif prev_flag == flag:
-            print "idling at phase: ", flag, " staying ", count*5, " secs"
+            if count%10 == 0 and count > 1:
+                print "idling at phase: ", flag, " staying ", count, " secs"
             count+=1
 
 
-        if count >2:
-            print "flag is ", flag
+        if count >20 and flag != 0:
+            print "stay in state: ", flag , " over 20 secs"
+            print "Reset the sketch system" 
             count = 0
             os.system('echo register_reset start_flag | simple_switch_CLI --thrift-port 9090 > /dev/null &')
             os.system('echo register_reset start_flag | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-            os.system('echo register_reset start_flag | simple_switch_CLI --thrift-port 9090 > /dev/null &')
+            os.system('./reset.sh')
 
-            #os.system('echo register_reset last_timestamp | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            #os.system('echo register_reset cur_timestamp | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch2_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-            os.system('echo register_reset cm_sketch2_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-            os.system('echo register_reset cm_sketch2_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-                        
-            os.system('echo register_reset cm_sketch3_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-            os.system('echo register_reset cm_sketch3_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-            os.system('echo register_reset cm_sketch3_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-                    
-            os.system('echo register_reset cm_sketch4_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-            os.system('echo register_reset cm_sketch4_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-            os.system('echo register_reset cm_sketch4_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-                    
-            os.system('echo register_reset cm_sketch1_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-            os.system('echo register_reset cm_sketch1_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-            os.system('echo register_reset cm_sketch1_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null &')    
+            print "Reset sketch finish"
 
-            os.system('echo register_reset cm_sketch5_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-            os.system('echo register_reset cm_sketch5_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-            os.system('echo register_reset cm_sketch5_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-            
-            os.system('echo register_reset mask_queried_1 | simple_switch_CLI --thrift-port 9090 > /dev/null &')
-            os.system('echo register_reset mask_queried_2 | simple_switch_CLI --thrift-port 9090 > /dev/null &')            
-            os.system('echo register_reset mask_queried_3 | simple_switch_CLI --thrift-port 9090 > /dev/null &')   
-            os.system('echo register_reset mask_queried_4 | simple_switch_CLI --thrift-port 9090 > /dev/null &')   
-            os.system('echo register_reset mask_queried_5 | simple_switch_CLI --thrift-port 9090 > /dev/null &')   
-
-            print "Reset sketch all routine"
-        
-    '''     
-    flag = 0
-    prev_flag = -1
-    count=0
-    while True:
-        sleep(5)
-
-        os.system('echo register_read time_flag 0 | simple_switch_CLI --thrift-port 9090  | grep [0] | awk \'{print $3}\' > s1_time_flag.txt &')
-        with open('s1_time_flag.txt') as f:
-            for line in f:
-                flag = int(line)
-
-        if flag==0:
-            os.system('echo register_reset cm_sketch2_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch2_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch2_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset mask_queried_2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            
-            if prev_flag != flag:
-                print "detection in phase 1"
-                count = 0
-            prev_flag = flag
-            count+=1
-
-        elif flag==1 :
-            os.system('echo register_reset cm_sketch3_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch3_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch3_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset mask_queried_1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            
-            if prev_flag != flag:
-                print "detection in phase 2"
-                count = 0
-            prev_flag = flag
-            count+=1
-            
-        elif flag==2 :
-            os.system('echo register_reset cm_sketch4_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch4_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch4_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset mask_queried_2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            
-            if prev_flag != flag:
-                print "detection in phase 3"
-                count = 0
-            prev_flag = flag
-            count+=1
-            
-        elif flag==3 :
-            os.system('echo register_reset cm_sketch1_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch1_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch1_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')            
-            os.system('echo register_reset mask_queried_1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            
-            if prev_flag != flag:
-                print "detection in phase 4"
-                count = 0
-            prev_flag = flag
-            count+=1
-
-        
-        if count > 50 :
-            count = 0
-            os.system('echo register_reset start_flag | simple_switch_CLI --thrift-port 9090 > /dev/null')
-
-            os.system('echo register_reset cm_sketch2_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch2_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch2_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset mask_queried_2 | simple_switch_CLI --thrift-port 9090 > /dev/null')  
-                 
-            os.system('echo register_reset cm_sketch3_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch3_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch3_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset mask_queried_1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            
-            os.system('echo register_reset cm_sketch4_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch4_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch4_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            #os.system('echo register_reset mask_queried_2 | simple_switch_CLI --thrift-port 9090 > /dev/null')    
-              
-            os.system('echo register_reset cm_sketch1_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch1_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-            os.system('echo register_reset cm_sketch1_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null')            
-            #os.system('echo register_reset mask_queried_1 | simple_switch_CLI --thrift-port 9090 > /dev/null')
-    '''
             
 def writeforwardRules(p4info_helper, ingress_sw):
     """
@@ -262,6 +135,44 @@ def writeforwardRules(p4info_helper, ingress_sw):
             "port": 4
         })   
     ingress_sw.WriteTableEntry(table_entry)
+
+    table_entry = p4info_helper.buildTableEntry(
+        table_name="MyIngress.ipv4_lpm",
+        match_fields={
+            "hdr.ipv4.dstAddr": ("10.0.4.4", 32)
+        },
+        action_name="MyIngress.ipv4_forward",
+        action_params={
+            "dstAddr": "08:00:00:00:04:04",
+            "port": 5
+        })   
+    ingress_sw.WriteTableEntry(table_entry)
+    
+    table_entry = p4info_helper.buildTableEntry(
+        table_name="MyIngress.ipv4_lpm",
+        match_fields={
+            "hdr.ipv4.dstAddr": ("10.0.5.5", 32)
+        },
+        action_name="MyIngress.ipv4_forward",
+        action_params={
+            "dstAddr": "08:00:00:00:05:05",
+            "port": 6
+        })   
+    ingress_sw.WriteTableEntry(table_entry)
+    
+    table_entry = p4info_helper.buildTableEntry(
+        table_name="MyIngress.ipv4_lpm",
+        match_fields={
+            "hdr.ipv4.dstAddr": ("10.0.6.6", 32)
+        },
+        action_name="MyIngress.ipv4_forward",
+        action_params={
+            "dstAddr": "08:00:00:00:06:06",
+            "port": 7
+        })   
+    ingress_sw.WriteTableEntry(table_entry)
+    
+    
     print "Installed forward tunnel rule on %s" % ingress_sw.name
 
     # 2) Tunnel Transit Rule
@@ -385,17 +296,23 @@ def main(p4info_file_path, bmv2_file_path):
                 #print packetin.packet.header
                 metadata = packetin.packet.metadata
                 for i, meta in enumerate(metadata):
-                    print meta
+                    #print meta
                     metadata_id = meta.metadata_id
                     value = meta.value
                     if i > 1:
-                        print map(ord, value)
+                        #print map(ord, value)
                         tmp = map(ord, value)
                         v = 0
                         index = 0
                         for i in reversed(tmp):
                             v += i * math.pow(2, index)
                             index+=8
+                        if metadata_id == 3:
+                            print "Packet count in time interval i:"
+                        elif metadata_id ==4:
+                            print "Packet count in time interval i+1:"
+                        elif metadata_id ==5:
+                            print "Timestamp of this packet: "
                         print v
                             
                 num+=1

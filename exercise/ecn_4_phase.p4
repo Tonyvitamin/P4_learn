@@ -275,8 +275,8 @@ control Measurement(inout headers hdr,
 
             // Start detection
             if(s_flag==0){
-                time_flag.write(0, 1);
-                flag=1;
+                time_flag.write(0, 0);
+                flag=0;
                 start_flag.write(0, 1);
                 last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
                 query_flag.write(0, 1);
@@ -296,7 +296,7 @@ control Measurement(inout headers hdr,
             // 4. Query Sketch 5 & Sketch 4 ( S5[i] - S4[i] ), for any flow "i"
             // 5. Transition to Phase 2
             //else{
-                if(flag==1){
+                if(flag==0){
 
 
                     // Process packet in S1
@@ -309,14 +309,14 @@ control Measurement(inout headers hdr,
                     cm_sketch1_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);
 
                     // Reset Sketch 3 to 0
-                    cm_sketch3_r1.write(meta.ha_r1, 0);
-                    cm_sketch3_r2.write(meta.ha_r2, 0);
-                    cm_sketch3_r3.write(meta.ha_r3, 0);
+                    cm_sketch2_r1.write(meta.ha_r1, 0);
+                    cm_sketch2_r2.write(meta.ha_r2, 0);
+                    cm_sketch2_r3.write(meta.ha_r3, 0);
 
                     // Reset Queried Mask 3 to 0
-                    mask_queried_3.write(meta.ha_r1, 0);
-                    mask_queried_3.write(meta.ha_r2, 0);
-                    mask_queried_3.write(meta.ha_r3, 0);
+                    mask_queried_2.write(meta.ha_r1, 0);
+                    mask_queried_2.write(meta.ha_r2, 0);
+                    mask_queried_2.write(meta.ha_r3, 0);
 
                     // Query S5-S4 if necessary
                     //if(q_flag==1){
@@ -379,7 +379,7 @@ control Measurement(inout headers hdr,
                     //}
                     // transition to phase 2
                     if(t_diff>5000000){
-                        time_flag.write(0, 2);
+                        time_flag.write(0, 1);
                         last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
 
                     }
@@ -393,7 +393,7 @@ control Measurement(inout headers hdr,
                 // 4. Query Sketch 1 & Sketch 5 ( S1[i] - S4[i] ), for any flow "i"
                 // 5. Transition to Phase 3
 
-                else if (flag==2){
+                else if (flag==1){
 
 
                     // Process packet in S2
@@ -406,14 +406,14 @@ control Measurement(inout headers hdr,
                     cm_sketch2_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);
 
                     // Reset Sketch 4 to 0
-                    cm_sketch4_r1.write(meta.ha_r1, 0);
-                    cm_sketch4_r2.write(meta.ha_r2, 0);
-                    cm_sketch4_r3.write(meta.ha_r3, 0);
+                    cm_sketch3_r1.write(meta.ha_r1, 0);
+                    cm_sketch3_r2.write(meta.ha_r2, 0);
+                    cm_sketch3_r3.write(meta.ha_r3, 0);
 
                     // Reset Queried Mask 4 to 0
-                    mask_queried_4.write(meta.ha_r1, 0);
-                    mask_queried_4.write(meta.ha_r2, 0);
-                    mask_queried_4.write(meta.ha_r3, 0);
+                    mask_queried_3.write(meta.ha_r1, 0);
+                    mask_queried_3.write(meta.ha_r2, 0);
+                    mask_queried_3.write(meta.ha_r3, 0);
 
 
                     // Query S1-S5 if necessary
@@ -476,7 +476,7 @@ control Measurement(inout headers hdr,
 
                     // transition to phase 3
                     if(t_diff>5000000){
-                        time_flag.write(0, 3);
+                        time_flag.write(0, 2);
                         last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
                     }                
 
@@ -489,7 +489,7 @@ control Measurement(inout headers hdr,
                 // 3. Reset Queried Mask 5 to 0
                 // 4. Query Sketch 2 & Sketch 1 ( S2[i] - S1[i] ), for any flow "i"
                 // 5. Transition to Phase 4
-                else if(flag==3){
+                else if(flag==2){
 
                     // Process packet in S3
                     cm_sketch3_r1.read(meta.qc_r1, meta.ha_r1);
@@ -501,14 +501,14 @@ control Measurement(inout headers hdr,
                     cm_sketch3_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);                
 
                     // Reset Sketch 5 to 0
-                    cm_sketch5_r1.write(meta.ha_r1, 0);
-                    cm_sketch5_r2.write(meta.ha_r2, 0);
-                    cm_sketch5_r3.write(meta.ha_r3, 0);
+                    cm_sketch4_r1.write(meta.ha_r1, 0);
+                    cm_sketch4_r2.write(meta.ha_r2, 0);
+                    cm_sketch4_r3.write(meta.ha_r3, 0);
 
                     // Reset Queried Mask 5 to 0
-                    mask_queried_5.write(meta.ha_r1, 0);
-                    mask_queried_5.write(meta.ha_r2, 0);
-                    mask_queried_5.write(meta.ha_r3, 0);
+                    mask_queried_4.write(meta.ha_r1, 0);
+                    mask_queried_4.write(meta.ha_r2, 0);
+                    mask_queried_4.write(meta.ha_r3, 0);
 
 
                     // Query S2-S1 if necessary
@@ -570,7 +570,7 @@ control Measurement(inout headers hdr,
                     //}
                     // transition to phase 4
                     if(t_diff>5000000){
-                        time_flag.write(0, 4);
+                        time_flag.write(0, 3);
                         last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
 
                     }
@@ -582,7 +582,7 @@ control Measurement(inout headers hdr,
                 // 3. Reset Queried Mask 1 to 0 
                 // 3. Query Sketch 3 & Sketch 2 ( S3[i] - S2[i] ), for any flow "i"
                 // 4. Transition to Phase 1            
-                else if(flag==4){
+                else if(flag==3){
 
                     // Process packet in S4
                     cm_sketch4_r1.read(meta.qc_r1, meta.ha_r1);
@@ -664,7 +664,7 @@ control Measurement(inout headers hdr,
                     //}
                     // transition to phase 1
                     if(t_diff>5000000){
-                        time_flag.write(0, 5);
+                        time_flag.write(0, 4);
                         last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
 
                     }
@@ -675,8 +675,9 @@ control Measurement(inout headers hdr,
                 // 2. Reset Sketch 2 to 0
                 // 3. Reset Queried Mask 2 to 0
                 // 3. Query Sketch 4 & Sketch 3 ( S4[i] - S3[i] ), for any flow "i"
-                // 4. Transition to Phase 1            
-                else if(flag==5){
+                // 4. Transition to Phase 1   
+                /*         
+                else if(flag==4){
 
                     // Process packet in S4
                     cm_sketch5_r1.read(meta.qc_r1, meta.ha_r1);
@@ -758,11 +759,11 @@ control Measurement(inout headers hdr,
                     //}
                     // transition to phase 1
                     if(t_diff>5000000){
-                        time_flag.write(0, 1);
+                        time_flag.write(0, 0);
                         last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
 
                     }
-                }
+                }*/
             //}
     }
 }
