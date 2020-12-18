@@ -12,19 +12,21 @@ const bit<19> ECN_THRESHOLD = 10;
 #define HASH_SEED_r2 10w34
 #define HASH_SEED_r3 10w56
 #define HASH_BASE 10w0
-#define HASH_MAX 10w9
+#define HASH_MAX 10w999
 
-// heavy part
-#define HASH_BASE_heavy 10w0
-#define HASH_MAX_HEAVY 10w9
-#define HASH_SEED_heavy 10w78
-
-const bit<32> FLOW_TABLE_SIZE_EACH = 10;
-const bit<32> HEAVY_PART_COUNTER_SIZE = 10;
-const bit<32> EVICT_THRESHOLD = 5;
-const bit<72> IDLE_HEAVY_COUNTER_FLOWID = 168w0;
+#define HASH_BASE_BL 10w0
+#define HASH_MAX_BL 10w9999
 
 
+#define IP_PROTO_TCP 8w6
+#define IP_PROTO_UDP 8w17
+
+const bit<32> FLOW_TABLE_SIZE_EACH = 1000;
+const bit<48> INTERVAL_SIZE = 2000000;
+const bit<32> CHANGE_THRESHOLD = 100;
+
+
+const bit<32> BLOOM_FILTER_SIZE_EACH = 10000;
 
 
 
@@ -37,15 +39,26 @@ const bit<72> IDLE_HEAVY_COUNTER_FLOWID = 168w0;
 typedef bit<9>  egressSpec_t;
 typedef bit<48> macAddr_t;
 typedef bit<32> ip4Addr_t;
+typedef bit<16> port_t;
 
 @controller_header("packet_in")
 header packet_in_header_t {
     bit<9> ingress_port;
     bit<7> direction_id;
+
+    //bit<32> sketch1_r1;
+    //bit<32> sketch1_r2;
+    //bit<32> sketch1_r3;
+
+    //bit<32> sketch2_r1;
+    //bit<32> sketch2_r2;
+    //bit<32> sketch2_r3;
+
     bit<32> flow_size_1;
     bit<32> flow_size_2;
-    bit<48> time_interval;
-    bit<8> sign;
+    bit<48> timestamp;
+    //bit<8>  sign;
+
 }
 
 //_PKT_OUT_HDR_ANNOT_
@@ -76,44 +89,69 @@ header ipv4_t {
     ip4Addr_t srcAddr;
     ip4Addr_t dstAddr;
 }
-// tuple in the heavy part of Elastic Sketch
-struct heavy_tuple {
-    bit<72> flowID;
-    bit<32>  p_vote;
-    bit<1>   flag;
-    bit<32>  total_vote;
+
+header tcp_t {
+    bit<16> src_port;
+    bit<16> dst_port;
+    bit<32> seq_no;
+    bit<32> ack_no;
+    bit<4>  data_offset;
+    bit<3>  res;
+    bit<3>  ecn;
+    bit<6>  ctrl;
+    bit<16> window;
+    bit<16> checksum;
+    bit<16> urgent_ptr;
 }
+
+header udp_t {
+    bit<16> src_port;
+    bit<16> dst_port;
+    bit<16> length_;
+    bit<16> checksum;
+}
+
 struct metadata {
     
     // Reward info
     bit<7> direction_id;
+
+    bit<32> sketch1_r1;
+    bit<32> sketch1_r2;
+    bit<32> sketch1_r3;
+
+    bit<32> sketch2_r1;
+    bit<32> sketch2_r2;
+    bit<32> sketch2_r3;
+
     bit<32> flow_size_1;
     bit<32> flow_size_2;
     bit<8>  sign;
-    bit<48> time_interval;
+    bit<48> timestamp;
 
 
     ip4Addr_t srcIP;
     ip4Addr_t dstIP;
+    port_t    srcPort;
+    port_t    dstPort;
     bit<8> protocol;
 
-    bit<72> flowID;
+    bit<104> flowID;
     bit<32> flow_cnt;
-
-    bit<32> ha_heavy;
-    heavy_tuple ha_tuple;
 
 
     bit<32> ha_r1;
     bit<32> ha_r2;
     bit<32> ha_r3;
 
+    bit<32> bl_r1;
+    bit<32> bl_r2;
+    bit<32> bl_r3;
+
     bit<32> qc_r1;
     bit<32> qc_r2;
     bit<32> qc_r3;
 
-    bit<32> cms_freq_estimate;
-    /* empty */
 }
 
 struct headers {
@@ -121,6 +159,9 @@ struct headers {
     packet_in_header_t packet_in;
     ethernet_t   ethernet;
     ipv4_t       ipv4;
+    tcp_t        tcp;
+    udp_t        udp;
+
 }
 
 /*************************************************************************
@@ -151,23 +192,36 @@ parser MyParser(packet_in packet,
             default: accept;
         }
     }
-    /*
-    state start {
-        transition parse_ethernet;
-    }
 
-    state parse_ethernet {
-        packet.extract(hdr.ethernet);
-        transition select(hdr.ethernet.etherType) {
-            TYPE_IPV4: parse_ipv4;
+    state parse_ipv4 {
+        packet.extract(hdr.ipv4);
+        transition select(hdr.ipv4.protocol) {
+            IP_PROTO_TCP: parse_tcp;
+            IP_PROTO_UDP: parse_udp;
             default: accept;
         }
     }
-    */
-    state parse_ipv4 {
-        packet.extract(hdr.ipv4);
+
+    state parse_tcp {
+        packet.extract(hdr.tcp);
+        meta.srcIP = hdr.ipv4.srcAddr;
+        meta.dstIP = hdr.ipv4.dstAddr;
+        meta.protocol = hdr.ipv4.protocol;
+        meta.srcPort = hdr.tcp.src_port;
+        meta.dstPort = hdr.tcp.dst_port;
         transition accept;
     }
+
+    state parse_udp {
+        packet.extract(hdr.udp);
+        meta.srcIP = hdr.ipv4.srcAddr;
+        meta.dstIP = hdr.ipv4.dstAddr;
+        meta.protocol = hdr.ipv4.protocol;
+        meta.srcPort = hdr.udp.src_port;
+        meta.dstPort = hdr.udp.dst_port;
+        transition accept;
+    }
+
 }
 
 
@@ -180,55 +234,51 @@ control MyVerifyChecksum(inout headers hdr, inout metadata meta) {
 }
 
 
+
+
 control Measurement(inout headers hdr,
                     inout metadata meta,
                     inout standard_metadata_t standard_metadata) {
 
     /* Sketch 1: CM Sketch */
-
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch1_r1;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch1_r2;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch1_r3;
 
 
     /* Sketch 2: CM Sketch */
-
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch2_r1;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch2_r2;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch2_r3;
 
     /* Sketch 3: CM Sketch */
-
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch3_r1;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch3_r2;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch3_r3;
 
 
     /* Sketch 4: CM Sketch */
-
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch4_r1;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch4_r2;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch4_r3;
 
     /* Sketch 5: CM Sketch */
-
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch5_r1;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch5_r2;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch5_r3;
 
     /* Queried Mask(bloom filter) */
     // In case that queried flow keep forwarding packet to controller to remind controller this flow change
-    register<bit<2> > (FLOW_TABLE_SIZE_EACH) mask_queried_1;
-    register<bit<2> > (FLOW_TABLE_SIZE_EACH) mask_queried_2;
-    register<bit<2> > (FLOW_TABLE_SIZE_EACH) mask_queried_3;
-    register<bit<2> > (FLOW_TABLE_SIZE_EACH) mask_queried_4;
-    register<bit<2> > (FLOW_TABLE_SIZE_EACH) mask_queried_5;
+    register<bit<2> > (BLOOM_FILTER_SIZE_EACH) mask_queried_1;
+    register<bit<2> > (BLOOM_FILTER_SIZE_EACH) mask_queried_2;
+    register<bit<2> > (BLOOM_FILTER_SIZE_EACH) mask_queried_3;
+    register<bit<2> > (BLOOM_FILTER_SIZE_EACH) mask_queried_4;
+    register<bit<2> > (BLOOM_FILTER_SIZE_EACH) mask_queried_5;
 
 
     register<bit<48> > (1) last_timestamp;
     register<bit<48> > (1) cur_timestamp;
-    register<bit<8> > (1) time_flag;
-    register<bit<2> >(1) query_flag;
+    register<bit<8> > (1) state_flag;
     register<bit<2> >(1) start_flag;
 
 
@@ -245,41 +295,40 @@ control Measurement(inout headers hdr,
         }
     }
     apply{
-            meta.srcIP = hdr.ipv4.srcAddr;
-            meta.dstIP = hdr.ipv4.dstAddr;
-            meta.protocol = hdr.ipv4.protocol;
+
 
             meta.flowID[31:0] = meta.srcIP;
             meta.flowID[63:32] = meta.dstIP;
-            meta.flowID[71:64] = meta.protocol;
+            meta.flowID[79:64] = meta.srcPort;
+            meta.flowID[95:80] = meta.dstPort;
+            meta.flowID[103:96] = meta.protocol;
 
             meta.flow_cnt = 1;//standard_metadata.packet_length;
-            hash(meta.ha_heavy, HashAlgorithm.crc16, HASH_BASE, {meta.flowID, HASH_SEED_heavy}, HASH_MAX_HEAVY);
             hash(meta.ha_r1, HashAlgorithm.crc16, HASH_BASE, {meta.flowID, HASH_SEED_r1}, HASH_MAX);
             hash(meta.ha_r2, HashAlgorithm.crc16, HASH_BASE, {meta.flowID, HASH_SEED_r2}, HASH_MAX);
             hash(meta.ha_r3, HashAlgorithm.crc16, HASH_BASE, {meta.flowID, HASH_SEED_r3}, HASH_MAX);
+
+            hash(meta.bl_r1, HashAlgorithm.crc16, HASH_BASE_BL, {meta.flowID, HASH_SEED_r1}, HASH_MAX_BL);
+            hash(meta.bl_r2, HashAlgorithm.crc16, HASH_BASE_BL, {meta.flowID, HASH_SEED_r2}, HASH_MAX_BL);
+            hash(meta.bl_r3, HashAlgorithm.crc16, HASH_BASE_BL, {meta.flowID, HASH_SEED_r3}, HASH_MAX_BL);
 
             bit<48>  t_diff;
             bit<48>  ct;
             bit<48>  lt;
             bit<8>   flag;
-            bit<2>   q_flag;
             bit<2>   s_flag;
-            //cur_timestamp.read(ct, 0);
 
 
-            time_flag.read(flag, 0);
-            query_flag.read(q_flag, 0);
+            state_flag.read(flag, 0);
             start_flag.read(s_flag, 0);
 
 
             // Start detection
             if(s_flag==0){
-                time_flag.write(0, 1);
+                state_flag.write(0, 1);
                 flag=1;
                 start_flag.write(0, 1);
                 last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
-                query_flag.write(0, 1);
             }
             ct = standard_metadata.ingress_global_timestamp;
 
@@ -287,14 +336,12 @@ control Measurement(inout headers hdr,
             last_timestamp.read(lt, 0);
             t_diff = ct - lt;
 
-            // Circular 4 phase process & query 
+            // Circular 5 State process & query 
 
-            // Phase 1
+            // State 1
             // 1. Process packet & store packet counter into sketch 1 (CM sketch)
-            // 2. Reset Sketch 3 to 0
-            // 3. Reset Queried Mask 3
-            // 4. Query Sketch 5 & Sketch 4 ( S5[i] - S4[i] ), for any flow "i"
-            // 5. Transition to Phase 2
+            // 2. Query Sketch 5 & Sketch 4 ( S5[i] - S4[i] ), for any flow "i"
+            // 3. Transition to State 2
             //else{
                 if(flag==1){
 
@@ -309,24 +356,23 @@ control Measurement(inout headers hdr,
                     cm_sketch1_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);
 
                     // Reset Sketch 3 to 0
-                    cm_sketch3_r1.write(meta.ha_r1, 0);
-                    cm_sketch3_r2.write(meta.ha_r2, 0);
-                    cm_sketch3_r3.write(meta.ha_r3, 0);
+                    //cm_sketch3_r1.write(meta.ha_r1, 0);
+                    //cm_sketch3_r2.write(meta.ha_r2, 0);
+                    //cm_sketch3_r3.write(meta.ha_r3, 0);
 
                     // Reset Queried Mask 3 to 0
-                    mask_queried_3.write(meta.ha_r1, 0);
-                    mask_queried_3.write(meta.ha_r2, 0);
-                    mask_queried_3.write(meta.ha_r3, 0);
+                    //mask_queried_3.write(meta.bl_r1, 0);
+                    //mask_queried_3.write(meta.bl_r2, 0);
+                    //mask_queried_3.write(meta.bl_r3, 0);
 
                     // Query S5-S4 if necessary
-                    //if(q_flag==1){
                         bit<2> index_1;
                         bit<2> index_2;
                         bit<2> index_3;
 
-                        mask_queried_1.read(index_1, meta.ha_r1);
-                        mask_queried_1.read(index_2, meta.ha_r2);
-                        mask_queried_1.read(index_3, meta.ha_r3);
+                        mask_queried_1.read(index_1, meta.bl_r1);
+                        mask_queried_1.read(index_2, meta.bl_r2);
+                        mask_queried_1.read(index_3, meta.bl_r3);
 
                         // Never Queried before
                         if(index_1!=1 ||  index_2!=1 || index_3!=1){
@@ -351,24 +397,42 @@ control Measurement(inout headers hdr,
                             cm_sketch5_r3.read(new_3, meta.ha_r3);
                             min_cnt(new_est, new_1, new_2, new_3);
 
-                            if(new_est > old_est + 50){
-                                mask_queried_1.write(meta.ha_r1, 1);
-                                mask_queried_1.write(meta.ha_r2, 1);
-                                mask_queried_1.write(meta.ha_r3, 1);
+                            if(new_est > old_est + CHANGE_THRESHOLD){
+                                mask_queried_1.write(meta.bl_r1, 1);
+                                mask_queried_1.write(meta.bl_r2, 1);
+                                mask_queried_1.write(meta.bl_r3, 1);
                                 standard_metadata.egress_spec = 255;
                                 meta.sign = 0;
-                                meta.time_interval = ct;
+                                meta.timestamp = ct;
+
+                                meta.sketch1_r1 = old_1;
+                                meta.sketch1_r2 = old_2;
+                                meta.sketch1_r3 = old_3;
+
+                                meta.sketch2_r1 = new_1;
+                                meta.sketch2_r2 = new_2;
+                                meta.sketch2_r3 = new_3;
+
                                 meta.flow_size_1 = old_est;
                                 meta.flow_size_2 = new_est;
                             }
 
-                            if(old_est > new_est + 50){
-                                mask_queried_1.write(meta.ha_r1, 1);
-                                mask_queried_1.write(meta.ha_r2, 1);
-                                mask_queried_1.write(meta.ha_r3, 1);
+                            if(old_est > new_est + CHANGE_THRESHOLD){
+                                mask_queried_1.write(meta.bl_r1, 1);
+                                mask_queried_1.write(meta.bl_r2, 1);
+                                mask_queried_1.write(meta.bl_r3, 1);
                                 standard_metadata.egress_spec = 255;
                                 meta.sign = 1;
-                                meta.time_interval = ct;
+                                meta.timestamp = ct;
+
+                                meta.sketch1_r1 = old_1;
+                                meta.sketch1_r2 = old_2;
+                                meta.sketch1_r3 = old_3;
+
+                                meta.sketch2_r1 = new_1;
+                                meta.sketch2_r2 = new_2;
+                                meta.sketch2_r3 = new_3;
+
                                 meta.flow_size_1 = old_est;
                                 meta.flow_size_2 = new_est;
                             }
@@ -376,22 +440,19 @@ control Measurement(inout headers hdr,
                         }
 
 
-                    //}
-                    // transition to phase 2
-                    if(t_diff>5000000){
-                        time_flag.write(0, 2);
+                    // transition to State 2
+                    if(t_diff>INTERVAL_SIZE){
+                        state_flag.write(0, 2);
                         last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
 
                     }
 
                 }
 
-                // Phase 2
+                // State 2
                 // 1. Process packet & store packet counter into sketch 2 (CM sketch)
-                // 2. Reset Sketch 4 to 0
-                // 3. Reset Queried Mask 4 to 0
-                // 4. Query Sketch 1 & Sketch 5 ( S1[i] - S4[i] ), for any flow "i"
-                // 5. Transition to Phase 3
+                // 2. Query Sketch 1 & Sketch 5 ( S1[i] - S4[i] ), for any flow "i"
+                // 3. Transition to State 3
 
                 else if (flag==2){
 
@@ -406,25 +467,24 @@ control Measurement(inout headers hdr,
                     cm_sketch2_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);
 
                     // Reset Sketch 4 to 0
-                    cm_sketch4_r1.write(meta.ha_r1, 0);
-                    cm_sketch4_r2.write(meta.ha_r2, 0);
-                    cm_sketch4_r3.write(meta.ha_r3, 0);
+                    //cm_sketch4_r1.write(meta.ha_r1, 0);
+                    //cm_sketch4_r2.write(meta.ha_r2, 0);
+                    //cm_sketch4_r3.write(meta.ha_r3, 0);
 
                     // Reset Queried Mask 4 to 0
-                    mask_queried_4.write(meta.ha_r1, 0);
-                    mask_queried_4.write(meta.ha_r2, 0);
-                    mask_queried_4.write(meta.ha_r3, 0);
+                    //mask_queried_4.write(meta.bl_r1, 0);
+                    //mask_queried_4.write(meta.bl_r2, 0);
+                    //mask_queried_4.write(meta.bl_r3, 0);
 
 
                     // Query S1-S5 if necessary
-                    //if(q_flag==1){
                         bit<2> index_1;
                         bit<2> index_2;
                         bit<2> index_3;
 
-                        mask_queried_2.read(index_1, meta.ha_r1);
-                        mask_queried_2.read(index_2, meta.ha_r2);
-                        mask_queried_2.read(index_3, meta.ha_r3);
+                        mask_queried_2.read(index_1, meta.bl_r1);
+                        mask_queried_2.read(index_2, meta.bl_r2);
+                        mask_queried_2.read(index_3, meta.bl_r3);
 
                         // Never Queried before
                         if(index_1!=1 ||  index_2!=1 || index_3!=1){
@@ -449,46 +509,61 @@ control Measurement(inout headers hdr,
                             cm_sketch1_r3.read(new_3, meta.ha_r3);
                             min_cnt(new_est, new_1, new_2, new_3);
 
-                            if(new_est > old_est + 50){
-                                mask_queried_2.write(meta.ha_r1, 1);
-                                mask_queried_2.write(meta.ha_r2, 1);
-                                mask_queried_2.write(meta.ha_r3, 1);
+                            if(new_est > old_est + CHANGE_THRESHOLD){
+                                mask_queried_2.write(meta.bl_r1, 1);
+                                mask_queried_2.write(meta.bl_r2, 1);
+                                mask_queried_2.write(meta.bl_r3, 1);
                                 standard_metadata.egress_spec = 255;
                                 meta.sign = 0;
-                                meta.time_interval = ct;
+                                meta.timestamp = ct;
+
+                                meta.sketch1_r1 = old_1;
+                                meta.sketch1_r2 = old_2;
+                                meta.sketch1_r3 = old_3;
+
+                                meta.sketch2_r1 = new_1;
+                                meta.sketch2_r2 = new_2;
+                                meta.sketch2_r3 = new_3;
+
                                 meta.flow_size_1 = old_est;
                                 meta.flow_size_2 = new_est;
                             }
 
-                            if(old_est > new_est + 50){
-                                mask_queried_2.write(meta.ha_r1, 1);
-                                mask_queried_2.write(meta.ha_r2, 1);
-                                mask_queried_2.write(meta.ha_r3, 1);
+                            if(old_est > new_est + CHANGE_THRESHOLD){
+                                mask_queried_2.write(meta.bl_r1, 1);
+                                mask_queried_2.write(meta.bl_r2, 1);
+                                mask_queried_2.write(meta.bl_r3, 1);
                                 standard_metadata.egress_spec = 255;
                                 meta.sign = 1;
-                                meta.time_interval = ct;
+                                meta.timestamp = ct;
+
+                                meta.sketch1_r1 = old_1;
+                                meta.sketch1_r2 = old_2;
+                                meta.sketch1_r3 = old_3;
+
+                                meta.sketch2_r1 = new_1;
+                                meta.sketch2_r2 = new_2;
+                                meta.sketch2_r3 = new_3;
+
                                 meta.flow_size_1 = old_est;
                                 meta.flow_size_2 = new_est;
                             }
 
                         }
-                    //}
 
-                    // transition to phase 3
-                    if(t_diff>5000000){
-                        time_flag.write(0, 3);
+                    // transition to State 3
+                    if(t_diff>INTERVAL_SIZE){
+                        state_flag.write(0, 3);
                         last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
                     }                
 
 
                 }
 
-                // Phase 3
+                // State 3
                 // 1. Process packet & store packet counter into sketch 3 (CM sketch)
-                // 2. Reset Sketch 5 to 0
-                // 3. Reset Queried Mask 5 to 0
-                // 4. Query Sketch 2 & Sketch 1 ( S2[i] - S1[i] ), for any flow "i"
-                // 5. Transition to Phase 4
+                // 2. Query Sketch 2 & Sketch 1 ( S2[i] - S1[i] ), for any flow "i"
+                // 3. Transition to State 4
                 else if(flag==3){
 
                     // Process packet in S3
@@ -501,25 +576,24 @@ control Measurement(inout headers hdr,
                     cm_sketch3_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);                
 
                     // Reset Sketch 5 to 0
-                    cm_sketch5_r1.write(meta.ha_r1, 0);
-                    cm_sketch5_r2.write(meta.ha_r2, 0);
-                    cm_sketch5_r3.write(meta.ha_r3, 0);
+                    //cm_sketch5_r1.write(meta.ha_r1, 0);
+                    //cm_sketch5_r2.write(meta.ha_r2, 0);
+                    //cm_sketch5_r3.write(meta.ha_r3, 0);
 
                     // Reset Queried Mask 5 to 0
-                    mask_queried_5.write(meta.ha_r1, 0);
-                    mask_queried_5.write(meta.ha_r2, 0);
-                    mask_queried_5.write(meta.ha_r3, 0);
+                    //mask_queried_5.write(meta.ha_r1, 0);
+                    //mask_queried_5.write(meta.ha_r2, 0);
+                    //mask_queried_5.write(meta.ha_r3, 0);
 
 
                     // Query S2-S1 if necessary
-                    //if(q_flag==1){
                         bit<2> index_1;
                         bit<2> index_2;
                         bit<2> index_3;
 
-                        mask_queried_3.read(index_1, meta.ha_r1);
-                        mask_queried_3.read(index_2, meta.ha_r2);
-                        mask_queried_3.read(index_3, meta.ha_r3);
+                        mask_queried_3.read(index_1, meta.bl_r1);
+                        mask_queried_3.read(index_2, meta.bl_r2);
+                        mask_queried_3.read(index_3, meta.bl_r3);
 
                         // Never Queried before
                         if(index_1!=1 ||  index_2!=1 || index_3!=1){
@@ -544,44 +618,59 @@ control Measurement(inout headers hdr,
                             cm_sketch2_r3.read(new_3, meta.ha_r3);
                             min_cnt(new_est, new_1, new_2, new_3);
 
-                            if(new_est > old_est + 50){
-                                mask_queried_3.write(meta.ha_r1, 1);
-                                mask_queried_3.write(meta.ha_r2, 1);
-                                mask_queried_3.write(meta.ha_r3, 1);
+                            if(new_est > old_est + CHANGE_THRESHOLD){
+                                mask_queried_3.write(meta.bl_r1, 1);
+                                mask_queried_3.write(meta.bl_r2, 1);
+                                mask_queried_3.write(meta.bl_r3, 1);
                                 standard_metadata.egress_spec = 255;
                                 meta.sign = 0;
-                                meta.time_interval = ct;
+                                meta.timestamp = ct;
+
+                                meta.sketch1_r1 = old_1;
+                                meta.sketch1_r2 = old_2;
+                                meta.sketch1_r3 = old_3;
+
+                                meta.sketch2_r1 = new_1;
+                                meta.sketch2_r2 = new_2;
+                                meta.sketch2_r3 = new_3;
+
                                 meta.flow_size_1 = old_est;
                                 meta.flow_size_2 = new_est;
                             }
 
-                            if(old_est > new_est + 50){
-                                mask_queried_3.write(meta.ha_r1, 1);
-                                mask_queried_3.write(meta.ha_r2, 1);
-                                mask_queried_3.write(meta.ha_r3, 1);
+                            if(old_est > new_est + CHANGE_THRESHOLD){
+                                mask_queried_3.write(meta.bl_r1, 1);
+                                mask_queried_3.write(meta.bl_r2, 1);
+                                mask_queried_3.write(meta.bl_r3, 1);
                                 standard_metadata.egress_spec = 255;
                                 meta.sign = 1;
-                                meta.time_interval = ct;
+                                meta.timestamp = ct;
+
+                                meta.sketch1_r1 = old_1;
+                                meta.sketch1_r2 = old_2;
+                                meta.sketch1_r3 = old_3;
+
+                                meta.sketch2_r1 = new_1;
+                                meta.sketch2_r2 = new_2;
+                                meta.sketch2_r3 = new_3;
+
                                 meta.flow_size_1 = old_est;
                                 meta.flow_size_2 = new_est;
                             }
 
                         }
-                    //}
-                    // transition to phase 4
-                    if(t_diff>5000000){
-                        time_flag.write(0, 4);
+                    // transition to State 4
+                    if(t_diff>INTERVAL_SIZE){
+                        state_flag.write(0, 4);
                         last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
 
                     }
                 }
 
-                // Phase 4
+                // State 4
                 // 1. Process packet & store packet counter into sketch 4 (CM sketch)
-                // 2. Reset Sketch 1 to 0
-                // 3. Reset Queried Mask 1 to 0 
-                // 3. Query Sketch 3 & Sketch 2 ( S3[i] - S2[i] ), for any flow "i"
-                // 4. Transition to Phase 1            
+                // 2. Query Sketch 3 & Sketch 2 ( S3[i] - S2[i] ), for any flow "i"
+                // 3. Transition to State 1            
                 else if(flag==4){
 
                     // Process packet in S4
@@ -594,26 +683,25 @@ control Measurement(inout headers hdr,
                     cm_sketch4_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);
    
                     // Reset Sketch 1 to 0
-                    cm_sketch1_r1.write(meta.ha_r1, 0);
-                    cm_sketch1_r2.write(meta.ha_r2, 0);
-                    cm_sketch1_r3.write(meta.ha_r3, 0);
+                    //cm_sketch1_r1.write(meta.ha_r1, 0);
+                    //cm_sketch1_r2.write(meta.ha_r2, 0);
+                    //cm_sketch1_r3.write(meta.ha_r3, 0);
 
 
                     // Reset Queried Mask 1 to 0
-                    mask_queried_1.write(meta.ha_r1, 0);
-                    mask_queried_1.write(meta.ha_r2, 0);
-                    mask_queried_1.write(meta.ha_r3, 0);
+                    //mask_queried_1.write(meta.ha_r1, 0);
+                    //mask_queried_1.write(meta.ha_r2, 0);
+                    //mask_queried_1.write(meta.ha_r3, 0);
 
 
                     // Query S3-S2 if necessary
-                    //if(q_flag==1){
                         bit<2> index_1;
                         bit<2> index_2;
                         bit<2> index_3;
 
-                        mask_queried_4.read(index_1, meta.ha_r1);
-                        mask_queried_4.read(index_2, meta.ha_r2);
-                        mask_queried_4.read(index_3, meta.ha_r3);
+                        mask_queried_4.read(index_1, meta.bl_r1);
+                        mask_queried_4.read(index_2, meta.bl_r2);
+                        mask_queried_4.read(index_3, meta.bl_r3);
 
                         // Never Queried before
                         if(index_1!=1 ||  index_2!=1 || index_3!=1){
@@ -638,44 +726,59 @@ control Measurement(inout headers hdr,
                             cm_sketch3_r3.read(new_3, meta.ha_r3);
                             min_cnt(new_est, new_1, new_2, new_3);
 
-                            if(new_est > old_est + 50){
-                                mask_queried_4.write(meta.ha_r1, 1);
-                                mask_queried_4.write(meta.ha_r2, 1);
-                                mask_queried_4.write(meta.ha_r3, 1);
+                            if(new_est > old_est + CHANGE_THRESHOLD){
+                                mask_queried_4.write(meta.bl_r1, 1);
+                                mask_queried_4.write(meta.bl_r2, 1);
+                                mask_queried_4.write(meta.bl_r3, 1);
                                 standard_metadata.egress_spec = 255;
                                 meta.sign = 0;
-                                meta.time_interval = ct;
+                                meta.timestamp = ct;
+
+                                meta.sketch1_r1 = old_1;
+                                meta.sketch1_r2 = old_2;
+                                meta.sketch1_r3 = old_3;
+
+                                meta.sketch2_r1 = new_1;
+                                meta.sketch2_r2 = new_2;
+                                meta.sketch2_r3 = new_3;
+
                                 meta.flow_size_1 = old_est;
                                 meta.flow_size_2 = new_est;
                             }
 
-                            if(old_est > new_est + 50){
-                                mask_queried_4.write(meta.ha_r1, 1);
-                                mask_queried_4.write(meta.ha_r2, 1);
-                                mask_queried_4.write(meta.ha_r3, 1);
+                            if(old_est > new_est + CHANGE_THRESHOLD){
+                                mask_queried_4.write(meta.bl_r1, 1);
+                                mask_queried_4.write(meta.bl_r2, 1);
+                                mask_queried_4.write(meta.bl_r3, 1);
                                 standard_metadata.egress_spec = 255;
                                 meta.sign = 1;
-                                meta.time_interval = ct;
+                                meta.timestamp = ct;
+
+                                meta.sketch1_r1 = old_1;
+                                meta.sketch1_r2 = old_2;
+                                meta.sketch1_r3 = old_3;
+
+                                meta.sketch2_r1 = new_1;
+                                meta.sketch2_r2 = new_2;
+                                meta.sketch2_r3 = new_3;
+
                                 meta.flow_size_1 = old_est;
                                 meta.flow_size_2 = new_est;
                             }
 
                         }
-                    //}
-                    // transition to phase 1
-                    if(t_diff>5000000){
-                        time_flag.write(0, 5);
+                    // transition to State 5
+                    if(t_diff>INTERVAL_SIZE){
+                        state_flag.write(0, 5);
                         last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
 
                     }
                 }
 
-                // Phase 5
+                // State 5
                 // 1. Process packet & store packet counter into sketch 5 (CM sketch)
-                // 2. Reset Sketch 2 to 0
-                // 3. Reset Queried Mask 2 to 0
-                // 3. Query Sketch 4 & Sketch 3 ( S4[i] - S3[i] ), for any flow "i"
-                // 4. Transition to Phase 1            
+                // 2. Query Sketch 4 & Sketch 3 ( S4[i] - S3[i] ), for any flow "i"
+                // 3. Transition to State 1            
                 else if(flag==5){
 
                     // Process packet in S4
@@ -688,26 +791,25 @@ control Measurement(inout headers hdr,
                     cm_sketch5_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);
    
                     // Reset Sketch 2 to 0
-                    cm_sketch2_r1.write(meta.ha_r1, 0);
-                    cm_sketch2_r2.write(meta.ha_r2, 0);
-                    cm_sketch2_r3.write(meta.ha_r3, 0);
+                    //cm_sketch2_r1.write(meta.ha_r1, 0);
+                    //cm_sketch2_r2.write(meta.ha_r2, 0);
+                    //cm_sketch2_r3.write(meta.ha_r3, 0);
 
 
                     // Reset Queried Mask 2 to 0
-                    mask_queried_2.write(meta.ha_r1, 0);
-                    mask_queried_2.write(meta.ha_r2, 0);
-                    mask_queried_2.write(meta.ha_r3, 0);
+                    //mask_queried_2.write(meta.ha_r1, 0);
+                    //mask_queried_2.write(meta.ha_r2, 0);
+                    //mask_queried_2.write(meta.ha_r3, 0);
 
 
                     // Query S4-S3 if necessary
-                    //if(q_flag==1){
                         bit<2> index_1;
                         bit<2> index_2;
                         bit<2> index_3;
 
-                        mask_queried_5.read(index_1, meta.ha_r1);
-                        mask_queried_5.read(index_2, meta.ha_r2);
-                        mask_queried_5.read(index_3, meta.ha_r3);
+                        mask_queried_5.read(index_1, meta.bl_r1);
+                        mask_queried_5.read(index_2, meta.bl_r2);
+                        mask_queried_5.read(index_3, meta.bl_r3);
 
                         // Never Queried before
                         if(index_1!=1 ||  index_2!=1 || index_3!=1){
@@ -732,33 +834,50 @@ control Measurement(inout headers hdr,
                             cm_sketch4_r3.read(new_3, meta.ha_r3);
                             min_cnt(new_est, new_1, new_2, new_3);
 
-                            if(new_est > old_est + 50){
-                                mask_queried_5.write(meta.ha_r1, 1);
-                                mask_queried_5.write(meta.ha_r2, 1);
-                                mask_queried_5.write(meta.ha_r3, 1);
+                            if(new_est > old_est + CHANGE_THRESHOLD){
+                                mask_queried_5.write(meta.bl_r1, 1);
+                                mask_queried_5.write(meta.bl_r2, 1);
+                                mask_queried_5.write(meta.bl_r3, 1);
                                 standard_metadata.egress_spec = 255;
                                 meta.sign = 0;
-                                meta.time_interval = ct;
+                                meta.timestamp = ct;
+
+                                meta.sketch1_r1 = old_1;
+                                meta.sketch1_r2 = old_2;
+                                meta.sketch1_r3 = old_3;
+
+                                meta.sketch2_r1 = new_1;
+                                meta.sketch2_r2 = new_2;
+                                meta.sketch2_r3 = new_3;
+
                                 meta.flow_size_1 = old_est;
                                 meta.flow_size_2 = new_est;
                             }
 
-                            if(old_est > new_est + 50){
-                                mask_queried_5.write(meta.ha_r1, 1);
-                                mask_queried_5.write(meta.ha_r2, 1);
-                                mask_queried_5.write(meta.ha_r3, 1);
+                            if(old_est > new_est + CHANGE_THRESHOLD){
+                                mask_queried_5.write(meta.bl_r1, 1);
+                                mask_queried_5.write(meta.bl_r2, 1);
+                                mask_queried_5.write(meta.bl_r3, 1);
                                 standard_metadata.egress_spec = 255;
                                 meta.sign = 1;
-                                meta.time_interval = ct;
+                                meta.timestamp = ct;
+
+                                meta.sketch1_r1 = old_1;
+                                meta.sketch1_r2 = old_2;
+                                meta.sketch1_r3 = old_3;
+
+                                meta.sketch2_r1 = new_1;
+                                meta.sketch2_r2 = new_2;
+                                meta.sketch2_r3 = new_3;
+
                                 meta.flow_size_1 = old_est;
                                 meta.flow_size_2 = new_est;
                             }
 
                         }
-                    //}
-                    // transition to phase 1
-                    if(t_diff>5000000){
-                        time_flag.write(0, 1);
+                    // transition to State 1
+                    if(t_diff>INTERVAL_SIZE){
+                        state_flag.write(0, 1);
                         last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
 
                     }
@@ -766,6 +885,7 @@ control Measurement(inout headers hdr,
             //}
     }
 }
+
 control packetio_ingress(inout headers hdr,
                          inout standard_metadata_t standard_metadata) {
     apply {
@@ -785,10 +905,20 @@ control packetio_egress(inout headers hdr,
             hdr.packet_in.setValid();
             hdr.packet_in.ingress_port = 4;
             hdr.packet_in.direction_id = 5;//meta.direction_id;
+
+            //hdr.packet_in.sketch1_r1 = meta.sketch1_r1;
+            //hdr.packet_in.sketch1_r2 = meta.sketch1_r2;
+            //hdr.packet_in.sketch1_r3 = meta.sketch1_r3;
+
+            //hdr.packet_in.sketch2_r1 = meta.sketch2_r1;
+            //hdr.packet_in.sketch2_r2 = meta.sketch2_r2;
+            //hdr.packet_in.sketch2_r3 = meta.sketch2_r3;
+
             hdr.packet_in.flow_size_1 = meta.flow_size_1;
             hdr.packet_in.flow_size_2 = meta.flow_size_2;
-            hdr.packet_in.time_interval = meta.time_interval;
-            hdr.packet_in.sign = meta.sign;
+            hdr.packet_in.timestamp = meta.timestamp;
+            //hdr.packet_in.sign = meta.sign;
+
         }
     }
 }
@@ -816,7 +946,7 @@ control MyIngress(inout headers hdr,
         meta.direction_id = 1;
         meta.flow_size_1 = 1200;
         meta.flow_size_2= 1200;
-        meta.time_interval = 20000000;
+        meta.timestamp = 20000000;
         //clone3(CloneType.I2E, 500, standard_metadata);
     
     }
@@ -842,8 +972,9 @@ control MyIngress(inout headers hdr,
 
         if (hdr.ipv4.isValid()) {
             ipv4_lpm.apply();
-            Measurement.apply(hdr, meta, standard_metadata);
-
+            if(hdr.tcp.isValid() || hdr.udp.isValid()){
+                Measurement.apply(hdr, meta, standard_metadata);
+            }
         }
     }
 }
@@ -899,6 +1030,9 @@ control MyDeparser(packet_out packet, in headers hdr) {
         packet.emit(hdr.packet_in);
         packet.emit(hdr.ethernet);
         packet.emit(hdr.ipv4);
+        packet.emit(hdr.tcp);
+        packet.emit(hdr.udp);
+
     }
 }
 

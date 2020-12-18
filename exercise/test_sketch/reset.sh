@@ -1,7 +1,7 @@
 #! /bin/bash
 
 echo register_reset start_flag | simple_switch_CLI --thrift-port 9090 > /dev/null
-echo register_reset time_flag | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset state_flag | simple_switch_CLI --thrift-port 9090 > /dev/null
 
 #echo register_reset last_timestamp | simple_switch_CLI --thrift-port 9090 > /dev/null
 #echo register_reset cur_timestamp | simple_switch_CLI --thrift-port 9090 > /dev/null

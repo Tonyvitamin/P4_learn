@@ -28,6 +28,15 @@ import p4runtime_lib.helper
 SWITCH_TO_HOST_PORT = 1
 SWITCH_TO_SWITCH_PORT = 2
 
+class packet_store_entry:
+    def __init__(self):
+        self.pkt_list = []
+        self.t1_packet_num = []
+        self.t2_packet_num = []
+        self.timestamp = []
+        self.hit = 0
+        
+        
 def reset_sketch():
     #sleep(5)
     os.system('./reset.sh')
@@ -41,9 +50,9 @@ def reset_sketch():
         #sleep(4)
         #os.system('echo register_read time_flag 0 | simple_switch_CLI --thrift-port 9090'  )
         #os.system('echo register_read time_flag 0 | simple_switch_CLI --thrift-port 9090  | grep [0] | awk \'{print $3}\'')
-        os.system('echo register_read time_flag 0 | simple_switch_CLI --thrift-port 9090  | grep [0] | awk \'{print $3}\' > s1_time_flag.txt &')
+        os.system('echo register_read state_flag 0 | simple_switch_CLI --thrift-port 9090  | grep [0] | awk \'{print $3}\' > s1_state_flag.txt &')
         sleep(1)
-        with open('s1_time_flag.txt') as f:
+        with open('s1_state_flag.txt') as f:
             for line in f:
                 flag = int(line)
         if prev_flag != flag:
@@ -276,6 +285,9 @@ def main(p4info_file_path, bmv2_file_path):
         num = 0
         t1 = threading.Thread(target=reset_sketch)
         t1.start()
+        s1_flow_detection = {}
+        key = 0
+        os.system('rm -f ./Experiment/n_flows/*.txt')
         while True:
 
 
@@ -288,12 +300,24 @@ def main(p4info_file_path, bmv2_file_path):
                 #pkt.show2()
                 if pkt[Ether].type==0x0800:
                     if pkt[IP].proto==0x06:
-                        print pkt[IP].src, pkt[IP].dst, pkt[TCP].sport, pkt[TCP].dport
+                        key = (pkt[IP].src, pkt[IP].dst, pkt[TCP].sport, pkt[TCP].dport, pkt[IP].proto)
+                        print pkt[IP].src, pkt[IP].dst, pkt[TCP].sport, pkt[TCP].dport, pkt[IP].proto
 
-                    if pkt[IP].proto==0x11:
-                        print pkt[IP].src, pkt[IP].dst, pkt[UDP].sport, pkt[UDP].dport
+                    elif pkt[IP].proto==0x11:
+                        key = (pkt[IP].src, pkt[IP].dst, pkt[UDP].sport, pkt[UDP].dport, pkt[IP].proto)
+                        print pkt[IP].src, pkt[IP].dst, pkt[UDP].sport, pkt[UDP].dport, pkt[IP].proto
+                    else:
+                        continue
+                else:
+                    continue
+                    
+                        
                 #print pkt
                 #print packetin.packet.header
+                
+                t1_packet_num = 0
+                t2_packet_num = 0
+                timestamp =  0
                 metadata = packetin.packet.metadata
                 for i, meta in enumerate(metadata):
                     #print meta
@@ -307,16 +331,63 @@ def main(p4info_file_path, bmv2_file_path):
                         for i in reversed(tmp):
                             v += i * math.pow(2, index)
                             index+=8
+                        '''
                         if metadata_id == 3:
-                            print "Packet count in time interval i:"
+                            print "sketch 1 row 1: ", v
+                            #t1_packet_num = v
                         elif metadata_id ==4:
-                            print "Packet count in time interval i+1:"
+                            print "sketch 1 row 2: ", v
+                            #t2_packet_num = v
                         elif metadata_id ==5:
-                            print "Timestamp of this packet: "
-                        print v
+                            print "sketch 1 row 3: ", v
+                            #timestamp = v                            
                             
+                        if metadata_id == 6:
+                            print "sketch 2 row 1 ", v
+                            #t1_packet_num = v
+                        elif metadata_id ==7:
+                            print "sketch 2 row 2 ", v
+                            #t2_packet_num = v
+                        elif metadata_id ==8:
+                            print "sketch 2 row 3 ", v
+                            #timestamp = v   
+                        '''                         
+                            
+                        if metadata_id == 3:
+                            print "Packet count in time interval i: ", v
+                            t1_packet_num = v
+                        elif metadata_id ==4:
+                            print "Packet count in time interval i+1: ", v
+                            t2_packet_num = v
+                        elif metadata_id ==5:
+                            print "Timestamp of this packet: ", v
+                            timestamp = v
+
+                cur_time = time.time()
+                print time.time()
+                if key in s1_flow_detection:
+                    s1_flow_detection[key].t1_packet_num.append(t1_packet_num)
+                    s1_flow_detection[key].t2_packet_num.append(t2_packet_num)
+                    s1_flow_detection[key].timestamp.append(timestamp)
+                    s1_flow_detection[key].hit += 1
+                else:
+                    entry = packet_store_entry()
+                    entry.t1_packet_num.append(t1_packet_num)
+                    entry.t2_packet_num.append(t2_packet_num)
+                    entry.timestamp.append(timestamp)
+                    entry.hit +=1
+                    s1_flow_detection[key] = entry
+                         
                 num+=1
+                #print s1_flow_detection
                 print "Received : ", num, " packets"
+                directory = './Experiment/n_flows/2_flow_case/' + str(key)
+                if not os.path.exists(directory):
+                    os.mkdir(directory)
+                filename = directory+'/'+str(key)+".txt"
+                with open(filename, 'a') as f:
+                    string = str(t1_packet_num)+ ' ' +str(t2_packet_num)+' ' +str(cur_time) + '\n'
+                    f.write(string)
 
  
 

@@ -123,6 +123,7 @@ struct metadata {
     bit<8>  sign;
     bit<48> timestamp;
 
+    bit<8> cur_state;
 
     ip4Addr_t srcIP;
     ip4Addr_t dstIP;
@@ -226,12 +227,139 @@ control MyVerifyChecksum(inout headers hdr, inout metadata meta) {
 control State_transition(inout headers hdr,
                     inout metadata meta,
                     inout standard_metadata_t standard_metadata){
+    apply {  
+            meta.flowID[31:0] = meta.srcIP;
+            meta.flowID[63:32] = meta.dstIP;
+            meta.flowID[79:64] = meta.srcPort;
+            meta.flowID[95:80] = meta.dstPort;
+            meta.flowID[103:96] = meta.protocol;
 
+            meta.flow_cnt = 1;//standard_metadata.packet_length;
+            hash(meta.ha_r1, HashAlgorithm.crc16, HASH_BASE, {meta.flowID, HASH_SEED_r1}, HASH_MAX);
+            hash(meta.ha_r2, HashAlgorithm.crc16, HASH_BASE, {meta.flowID, HASH_SEED_r2}, HASH_MAX);
+            hash(meta.ha_r3, HashAlgorithm.crc16, HASH_BASE, {meta.flowID, HASH_SEED_r3}, HASH_MAX);
+
+            bit<48>  t_diff;
+            bit<48>  ct;
+            bit<48>  lt;
+            bit<8>   flag;
+            bit<2>   s_flag;
+
+
+            state_flag.read(flag, 0);
+            start_flag.read(s_flag, 0);
+
+            // Start detection
+            if(s_flag==0){
+                state_flag.write(0, 1);
+                flag=1;
+                start_flag.write(0, 1);
+                last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
+            }
+            ct = standard_metadata.ingress_global_timestamp;
+
+            cur_timestamp.write(0, standard_metadata.ingress_global_timestamp);
+            last_timestamp.read(lt, 0);
+            t_diff = ct - lt;
+            meta.cur_state = flag;
+
+
+            // State 1
+            //  Transition to State 2
+            if(flag==1){
+
+                // transition to State 2
+                if(t_diff>INTERVAL_SIZE){
+                    state_flag.write(0, 2);
+                    last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
+
+                }
+
+            }
+
+            // State 2
+            //  Transition to State 3
+            else if (flag==2){
+                // transition to State 3
+                if(t_diff>INTERVAL_SIZE){
+                    state_flag.write(0, 3);
+                    last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
+                }                
+            }
+
+            // State 3
+            //  Transition to State 4
+            else if(flag==3){
+
+                // transition to State 4
+                if(t_diff>INTERVAL_SIZE){
+                    state_flag.write(0, 4);
+                    last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
+
+                }
+            }
+
+            // State 4
+            //   Transition to State 5            
+            else if(flag==4){
+
+                // transition to State 5
+                if(t_diff>INTERVAL_SIZE){
+                    state_flag.write(0, 5);
+                    last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
+
+                }
+            }
+
+            // State 5
+            //  Transition to State 1            
+            else if(flag==5){
+
+                // transition to State 1
+                if(t_diff>INTERVAL_SIZE){
+                    state_flag.write(0, 1);
+                    last_timestamp.write(0, standard_metadata.ingress_global_timestamp);
+
+                }
+            }
+    }
 }
 control Sketch_count(inout headers hdr,
                     inout metadata meta,
                     inout standard_metadata_t standard_metadata){
+    apply{
+            if(meta.cur_state==1){
 
+
+
+            }
+
+            // State 2
+            //  Transition to State 3
+            else if (meta.cur_state==2){
+         
+            }
+
+            // State 3
+            //  Transition to State 4
+            else if(meta.cur_state==3){
+
+
+            }
+
+            // State 4
+            //   Transition to State 5            
+            else if(meta.cur_state==4){
+
+            }
+
+            // State 5
+            //  Transition to State 1            
+            else if(meta.cur_state==5){
+
+
+            }
+    }
 }
 
 control Change_detection(inout headers hdr,
