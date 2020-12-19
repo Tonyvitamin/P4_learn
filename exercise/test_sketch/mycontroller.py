@@ -35,6 +35,7 @@ class packet_store_entry:
         self.t2_packet_num = []
         self.timestamp = []
         self.hit = 0
+        self.flow_id = -1
         
         
 def reset_sketch():
@@ -376,15 +377,16 @@ def main(p4info_file_path, bmv2_file_path):
                     entry.t2_packet_num.append(t2_packet_num)
                     entry.timestamp.append(timestamp)
                     entry.hit +=1
+                    entry.flow_id = len(s1_flow_detection) + 1
                     s1_flow_detection[key] = entry
                          
                 num+=1
                 #print s1_flow_detection
                 print "Received : ", num, " packets"
-                directory = './Experiment/n_flows/5_flow_case/' + str(key)
+                directory = './Experiment/sketch_size/3_100/' + str(s1_flow_detection[key].flow_id)
                 if not os.path.exists(directory):
                     os.mkdir(directory)
-                filename = directory+'/'+str(key)+".txt"
+                filename = directory+'/'+str(s1_flow_detection[key].flow_id)+".txt"
                 with open(filename, 'a') as f:
                     string = str(t1_packet_num)+ ' ' +str(t2_packet_num)+' ' +str(cur_time) + '\n'
                     f.write(string)

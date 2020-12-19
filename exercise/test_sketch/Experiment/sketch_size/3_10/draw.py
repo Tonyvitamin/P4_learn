@@ -3,7 +3,7 @@ from  matplotlib import pyplot as plt
 import os
 
 
-def draw_rate(gt_file, start_time):
+def draw_rate(gt_file, start_time, directory):
     gt_x = []
     gt_y = []
     idx = 0
@@ -12,7 +12,10 @@ def draw_rate(gt_file, start_time):
         for rate in f:
             if float(rate) > 0.0:
                 gt_x.append(idx)
-                gt_y.append(float(rate))
+                if float(rate) > 20:
+                    gt_y.append(float(rate)/1000.0)
+                else:
+                    gt_y.append(float(rate))
                 ticks.append(str(idx)+'~'+str(idx+2)+' ')
                 idx+=2
 
@@ -35,12 +38,14 @@ def draw_rate(gt_file, start_time):
         label.set_rotation(45)
 
     plt.legend()
-    plt.savefig('flow_rate.png')
+    filename = directory + '/flow_rate.png'
+
+    plt.savefig(filename)
     plt.close()   
     
     
     
-def draw_comp(gt_file, de_file, start_time):
+def draw_comp(gt_file, de_file, start_time, directory):
     
     gt_x = []
     tmp_y = [0.0]
@@ -51,7 +56,10 @@ def draw_comp(gt_file, de_file, start_time):
         for rate in f:
             if float(rate) > 0.0:
                 gt_x.append(idx)
-                tmp_y.append(float(rate))
+                if float(rate) > 20.0:
+                    tmp_y.append(float(rate)/1000.0)
+                else:
+                    tmp_y.append(float(rate))
                 ticks.append(str(idx)+'~'+str(idx+2)+' ')
                 idx+=2
 
@@ -92,7 +100,8 @@ def draw_comp(gt_file, de_file, start_time):
     #for label in ax.xaxis.get_ticklabels():
     #    label.set_rotation(45)
     plt.legend()
-    plt.savefig('flow_detection.png')
+    filename = directory + '/flow_detection.png'
+    plt.savefig(filename)
     plt.close()     
                 
                 
@@ -104,9 +113,32 @@ if __name__ == "__main__":
     with open('start_time.txt') as f:
         for time in f:
             times.append(float(time))
-    draw_rate('4_result.txt', times[0])
-    draw_comp('4_result.txt', "./1/1.txt", times[1])
-    #draw_comp('4_result.txt', "('10.0.1.1', '10.0.2.2', 52852, 5001, 17)/('10.0.1.1', '10.0.2.2', 52852, 5001, 17).txt", times[1])
-    #draw_comp('5_result.txt', "('10.0.1.1', '10.0.2.2', 45493, 5001, 17).txt", times[2])
-    #draw_comp('6_result.txt', "('10.0.1.1', '10.0.2.2', 45493, 5001, 17).txt", times[3])
-    #draw_comp('7_result.txt', "('10.0.1.1', '10.0.2.2', 45493, 5001, 17).txt", times[4])
+    draw_rate('3_result.txt', times[0], './1')
+    draw_comp('3_result.txt', "./1/1.txt", times[0], './1')
+    
+    draw_rate('4_result.txt', times[1], './2')
+    draw_comp('4_result.txt', "./2/2.txt", times[1], './2')
+    
+    draw_rate('5_result.txt', times[2], './3')
+    draw_comp('5_result.txt', "./3/3.txt", times[2], './3')
+    
+    draw_rate('6_result.txt', times[3], './4')
+    draw_comp('6_result.txt', "./4/4.txt", times[3], './4')
+    
+    draw_rate('7_result.txt', times[4], './5')
+    draw_comp('7_result.txt', "./5/5.txt", times[4], './5')
+    
+    draw_rate('8_result.txt', times[5], './6')
+    draw_comp('8_result.txt', "./6/6.txt", times[5], './6')
+    
+    draw_rate('9_result.txt', times[6], './7')
+    draw_comp('9_result.txt', "./7/7.txt", times[6], './7')
+    
+    draw_rate('10_result.txt', times[7], './8')
+    draw_comp('10_result.txt', "./8/8.txt", times[7], './8')
+    
+    draw_rate('11_result.txt', times[8], './9')
+    draw_comp('11_result.txt', "./9/9.txt", times[8], './9')    
+    
+    draw_rate('12_result.txt', times[9], './10')
+    draw_comp('12_result.txt', "./10/10.txt", times[9], './10')
