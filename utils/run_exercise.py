@@ -356,7 +356,7 @@ class ExerciseRunner:
         sleep(10)
 
         h1, h2, h3, h4, h5, h6 = self.net.get('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
-        h2.cmd('iperf -s -u -i 2 > ./Experiment/n_flows/5_flow_case/x_h2.txt &')
+        h2.cmd('iperf -s -u -i 2 > ./Experiment/n_flows/2_flow_case/x_h2.txt &')
         #h3.cmd('iperf -s -u > x_h3.txt &')
         #h4.cmd('iperf -s -u > x_h4.txt &')
         #h5.cmd('iperf -s -u > x_h5.txt &')
@@ -364,9 +364,9 @@ class ExerciseRunner:
         #h6.cmd('iperf -s -u > x_h6.txt &')
 
         for t in range(2):
-            duration = random.randint(10, 50)
-            interval = random.randint(1, 5)
-            data_rate = random.randint(1, 21)
+            duration = 20 #random.randint(10, 50)
+            interval = 4#random.randint(1, 5)
+            data_rate = 15
             command = 'iperf -c 10.0.2.2 -t ' + str(duration) + ' -i 2 -b '+ str(data_rate) +'m & '
             sleep(interval)
             cur_time = time.time()
