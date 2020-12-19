@@ -383,7 +383,7 @@ def main(p4info_file_path, bmv2_file_path):
                 num+=1
                 #print s1_flow_detection
                 print "Received : ", num, " packets"
-                directory = './Experiment/sketch_size/3_100/' + str(s1_flow_detection[key].flow_id)
+                directory = './Experiment/interval/5_sec/' + str(s1_flow_detection[key].flow_id)
                 if not os.path.exists(directory):
                     os.mkdir(directory)
                 filename = directory+'/'+str(s1_flow_detection[key].flow_id)+".txt"

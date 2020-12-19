@@ -357,7 +357,7 @@ class ExerciseRunner:
 
         h1, h2, h3, h4, h5, h6 = self.net.get('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
         #h1.cmd('iperf -s -u -i 2 > ./Experiment/n_flows/2_flow_case/x_h1.txt &')
-        h2.cmd('iperf -s -u -i 2 > ./Experiment/sketch_size/3_100/x_h2.txt &')
+        h2.cmd('iperf -s -u -i 1 > ./Experiment/interval/5_sec/x_h2.txt &')
         #h3.cmd('iperf -s -u -i 2 > ./Experiment/n_flows/2_flow_case/x_h3.txt &')
         #h4.cmd('iperf -s -u -i 2 > ./Experiment/n_flows/2_flow_case/x_h4.txt &')
         #h5.cmd('iperf -s -u -i 2 > ./Experiment/n_flows/2_flow_case/x_h5.txt &')
@@ -367,12 +367,12 @@ class ExerciseRunner:
             duration = 30 #random.randint(10, 50)
             interval = 2
             data_rate = 20
-            command = 'iperf -c 10.0.2.2 -t ' + str(duration) + ' -i 2 -b '+ str(data_rate) +'m & '
+            command = 'iperf -c 10.0.2.2 -t ' + str(duration) + ' -i 1 -b '+ str(data_rate) +'m & '
             sleep(interval)
             cur_time = time.time()
             h1.cmd(command)
             print time.time()
-            filename = "./Experiment/sketch_size/3_100/start_time.txt"
+            filename = "./Experiment/interval/5_sec/start_time.txt"
             with open(filename, 'a') as f:
                 string = str(cur_time) + '\n'
                 f.write(string)

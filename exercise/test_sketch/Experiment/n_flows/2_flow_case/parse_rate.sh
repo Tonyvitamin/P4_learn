@@ -1,6 +1,6 @@
 #! /bin/bash
 
-hosts=7
+hosts=4
 accept=0
 #rm result.txt
 for i in $(seq 3 $hosts);

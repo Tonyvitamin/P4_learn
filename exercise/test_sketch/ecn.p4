@@ -12,7 +12,7 @@ const bit<19> ECN_THRESHOLD = 10;
 #define HASH_SEED_r2 10w34
 #define HASH_SEED_r3 10w56
 #define HASH_BASE 10w0
-#define HASH_MAX 10w99
+#define HASH_MAX 10w19
 
 #define HASH_BASE_BL 10w0
 #define HASH_MAX_BL 10w9999
@@ -21,8 +21,8 @@ const bit<19> ECN_THRESHOLD = 10;
 #define IP_PROTO_TCP 8w6
 #define IP_PROTO_UDP 8w17
 
-const bit<32> FLOW_TABLE_SIZE_EACH = 100;
-const bit<48> INTERVAL_SIZE = 2000000;
+const bit<32> FLOW_TABLE_SIZE_EACH = 20;
+const bit<48> INTERVAL_SIZE = 5000000;
 const bit<32> CHANGE_THRESHOLD = 100;
 
 
