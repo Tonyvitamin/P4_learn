@@ -352,7 +352,7 @@ class ExerciseRunner:
             print('corresponding txt file in %s:' % self.log_dir)
             print(' for example run:  cat %s/s1-p4runtime-requests.txt' % self.log_dir)
             print('')
-
+        '''
         sleep(10)
 
         h1, h2, h3, h4, h5, h6 = self.net.get('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
@@ -376,7 +376,7 @@ class ExerciseRunner:
             with open(filename, 'a') as f:
                 string = str(cur_time) + '\n'
                 f.write(string)
-
+        '''
         CLI(self.net)
 
 

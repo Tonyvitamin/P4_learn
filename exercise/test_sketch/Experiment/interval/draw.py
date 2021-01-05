@@ -17,14 +17,17 @@ def draw_rate_comp(directory1, directory2):
     
     int_2_sec = []
     int_5_sec = []
+    original = []
     x = []
     ticks = []
     for idx in range(3, 13):
         filename = str(idx)+'_result.txt'
         filename1 = directory1+filename
         filename2 = directory2+filename
+        filename3 = './'+filename
         throughput1 = 0
         throughput2 = 0
+        throughput3 = 0
         with open(filename1) as f:
             for rate in f:
                 if float(rate) > 20:
@@ -38,9 +41,16 @@ def draw_rate_comp(directory1, directory2):
                     throughput2 = float(rate)/1000.0
                 else:
                     throughput2 = float(rate)
+        with open(filename3) as f:
+            for rate in f:
+                if float(rate) > 20:
+                    throughput3 = float(rate)/1000.0
+                else:
+                    throughput3 = float(rate)
         x.append(idx-2)        
         int_2_sec.append(throughput1)
         int_5_sec.append(throughput2) 
+        original.append(throughput3)
         ticks.append(idx-2)    
             
 
@@ -54,6 +64,7 @@ def draw_rate_comp(directory1, directory2):
     x = np.array(x)
     interval_1 = plt.bar(x, int_2_sec, 0.2, alpha=.4,  label='2 second', color="red")
     interval_2 = plt.bar(x+0.2, int_5_sec, 0.2, alpha=.4, label='5 second', color='blue')
+    interval_3 = plt.bar(x+0.4, original, 0.2, alpha=.4, label='No sketch', color='green')
 
     #createLabels(interval_1)
     #createLabels(interval_2)

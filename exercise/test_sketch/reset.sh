@@ -31,3 +31,14 @@ echo register_reset mask_queried_2 | simple_switch_CLI --thrift-port 9090 > /dev
 echo register_reset mask_queried_3 | simple_switch_CLI --thrift-port 9090 > /dev/null   
 echo register_reset mask_queried_4 | simple_switch_CLI --thrift-port 9090 > /dev/null   
 echo register_reset mask_queried_5 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
+echo register_reset hp0           | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset hp1           | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset hp2           | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset hp3           | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset hp4           | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset hp5           | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset hp6           | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset hp7           | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset hp8           | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset hp9           | simple_switch_CLI --thrift-port 9090 > /dev/null

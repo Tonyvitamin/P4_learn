@@ -319,6 +319,7 @@ def main(p4info_file_path, bmv2_file_path):
                 t1_packet_num = 0
                 t2_packet_num = 0
                 timestamp =  0
+                state = 0
                 metadata = packetin.packet.metadata
                 for i, meta in enumerate(metadata):
                     #print meta
@@ -363,6 +364,9 @@ def main(p4info_file_path, bmv2_file_path):
                         elif metadata_id ==5:
                             print "Timestamp of this packet: ", v
                             timestamp = v
+                        elif metadata_id ==6:
+                            print "State of this packet: ", v
+                            state = v
 
                 cur_time = time.time()
                 print time.time()
