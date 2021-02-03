@@ -19,7 +19,7 @@ const bit<48> TIME_DELTA = 1000;
 // Report filter
 #define HASH_SEED_BM 10w56
 #define HASH_BASE_BM 10w0
-#define HASH_MAX_BM 10w9999
+#define HASH_MAX_BM 10w222
 
 
 #define IP_PROTO_TCP 8w6
@@ -56,15 +56,50 @@ cm_sketch##num_r3.read(est3, meta.ha_r3);\
 /* Pipe part */
 #define ENTRIES_PER_TABLE 20
 #define ENTRY_WIDTH 136
+#define ENTRY_WIDTH_1  184
 
     register<bit<32>>(ENTRIES_PER_TABLE) pipe0;
-    register<bit<32>>(ENTRIES_PER_TABLE) pipe1;
-    register<bit<32>>(ENTRIES_PER_TABLE) pipe2;
-    register<bit<32>>(ENTRIES_PER_TABLE) pipe3;
-    register<bit<32>>(ENTRIES_PER_TABLE) pipe4;
+//    register<bit<32>>(ENTRIES_PER_TABLE) pipe1;
+//    register<bit<32>>(ENTRIES_PER_TABLE) pipe2;
+//    register<bit<32>>(ENTRIES_PER_TABLE) pipe3;
+//    register<bit<32>>(ENTRIES_PER_TABLE) pipe4;
 
-
+#define S_HP_INIT(num) register<bit<ENTRY_WIDTH_1>>(ENTRIES_PER_TABLE) hp##num
 #define HP_INIT(num) register<bit<ENTRY_WIDTH>>(ENTRIES_PER_TABLE) hp##num
+
+/* Initialize HP*/
+/* 2 pipe for each state*/
+S_HP_INIT(0);
+S_HP_INIT(1);
+HP_INIT(2);
+
+S_HP_INIT(3);
+S_HP_INIT(4);
+HP_INIT(5);
+
+S_HP_INIT(6);
+S_HP_INIT(7);
+HP_INIT(8);
+
+S_HP_INIT(9);
+S_HP_INIT(10);
+HP_INIT(11);
+
+S_HP_INIT(12);
+S_HP_INIT(13);
+HP_INIT(14);
+
+#define GET_1_Value(num, seed, flow_size) \
+action get_pipe##num (inout metadata meta, inout bit<32> flow_size){\
+hash(meta.currentIndex, HashAlgorithm.crc32, (bit<32>)0, {meta.original_flowID, seed}, (bit<32>)ENTRIES_PER_TABLE);\
+hp##num.read(meta.currentEntry_s, meta.currentIndex);\
+meta.currentTimestamp = meta.currentEntry_s[183:136];\
+meta.currentKey = meta.currentEntry_s[135:32];\
+meta.currentCount = meta.currentEntry_s[31:0];\
+if (meta.original_flowID - meta.currentKey == 0) {\
+    flow_size = flow_size + meta.currentCount;\
+}\
+}
 
 #define GET_Value(num, seed, flow_size) \
 action get_pipe##num (inout metadata meta, inout bit<32> flow_size){\
@@ -82,29 +117,45 @@ if (meta.original_flowID - meta.currentKey == 0) {\
 hash(meta.currentIndex, HashAlgorithm.crc32, (bit<32>)0, {meta.flowID, seed}, (bit<32>)ENTRIES_PER_TABLE);\
 hp##num.read(meta.currentEntry, meta.currentIndex);
 
+#define GET_ENTRY_S(num, seed) \
+hash(meta.currentIndex, HashAlgorithm.crc32, (bit<32>)0, {meta.flowID, seed}, (bit<32>)ENTRIES_PER_TABLE);\
+hp##num.read(meta.currentEntry_s, meta.currentIndex);
+
+
 #define WRITE_ENTRY(num, entry) hp##num.write(meta.currentIndex, entry)
 
 #define STAGE_1(num, seed) \
 action do_stage##num (inout metadata meta){\
 meta.flowID = meta.carriedKey;\
-GET_ENTRY(num, seed);\
-meta.currentKey = meta.currentEntry[135:32];\
-meta.currentCount = meta.currentEntry[31:0];\
+GET_ENTRY_S(num, seed);\
+meta.currentTimestamp = meta.currentEntry_s[183:136];\
+meta.currentKey = meta.currentEntry_s[135:32];\
+meta.currentCount = meta.currentEntry_s[31:0];\
 if (meta.currentKey - meta.carriedKey == 0) {\
+    meta.toWriteTimestamp = meta.timestamp;\
     meta.toWriteKey = meta.currentKey;\
     meta.toWriteCount = meta.currentCount + meta.carriedCount;\
     meta.carriedKey = 0;\
     meta.carriedCount = 0;\
 } else {\
-        meta.toWriteKey = meta.carriedKey;\
-        meta.toWriteCount = meta.carriedCount;\
+        if(meta.carriedTimestamp > 0 && meta.carriedTimestamp   > meta.currentTimestamp + TIME_DELTA ){\
+            meta.toWriteTimestamp = meta.carriedTimestamp;\
+            meta.toWriteKey = meta.carriedKey;\
+            meta.toWriteCount = meta.carriedCount;\
 \
-        meta.carriedKey = meta.currentKey;\
-        meta.carriedCount = meta.currentCount;\
+            meta.carriedTimestamp = 0;\
+            meta.carriedKey = meta.currentKey;\
+            meta.carriedCount = meta.currentCount;\
+        }else {\
+        meta.toWriteTimestamp = meta.currentTimestamp;\
+        meta.toWriteKey = meta.currentKey;\
+        meta.toWriteCount = meta.currentCount;\
+    }\
 }\
-bit<136> temp = meta.toWriteKey ++ meta.toWriteCount;\
+bit<184> temp = meta.toWriteTimestamp ++ meta.toWriteKey ++ meta.toWriteCount;\
 WRITE_ENTRY(num, temp);\
 }
+
 
 
 
@@ -135,26 +186,9 @@ bit<136> temp = meta.toWriteKey ++ meta.toWriteCount;\
 WRITE_ENTRY(num, temp);\
 }
 
-/* Initialize HP*/
-/* 2 pipe for each state*/
-HP_INIT(0);
-HP_INIT(1);
-
-HP_INIT(2);
-HP_INIT(3);
-
-HP_INIT(4);
-HP_INIT(5);
-
-HP_INIT(6);
-HP_INIT(7);
-
-HP_INIT(8);
-HP_INIT(9);
-
 
 const bit<32> FLOW_TABLE_SIZE_EACH = 20;
-const bit<48> INTERVAL_SIZE = 2000000;
+const bit<48> INTERVAL_SIZE = 3000000;
 const bit<32> CHANGE_THRESHOLD = 100;
 
 
@@ -263,16 +297,20 @@ struct metadata {
     bit<8> protocol;
 
     bit<32>     currentIndex;
+    bit<184>    currentEntry_s;
     bit<136>    currentEntry;
 
     bit<104>    currentKey;
     bit<32>     currentCount;
+    bit<48>     currentTimestamp;
 
     bit<104>    carriedKey;
     bit<32>     carriedCount;
+    bit<48>     carriedTimestamp;
 
     bit<104>    toWriteKey;
     bit<32>     toWriteCount;
+    bit<48>     toWriteTimestamp;
 
 
     bit<104> flowID;
@@ -454,30 +492,45 @@ control Measurement(inout headers hdr,
     }
     
     STAGE_1(0, 104w00000000000000000000)
-    STAGE_N(1, 104w11111111111111111111)
-    
-    STAGE_1(2, 104w22222222222222222222)
-    STAGE_N(3, 104w33333333333333333333)
+    STAGE_1(1, 104w11111111111111111111)
+    STAGE_N(2, 104w22222222222222222222)
 
+    STAGE_1(3, 104w33333333333333333333)
     STAGE_1(4, 104w44444444444444444444)
     STAGE_N(5, 104w55555555555555555555)
 
     STAGE_1(6, 104w66666666666666666666)
-    STAGE_N(7, 104w77777777777777777777)
+    STAGE_1(7, 104w77777777777777777777)
+    STAGE_N(8, 104w88888888888888888888)
+    
+    STAGE_1(9, 104w99999999999999999999)
+    STAGE_1(10, 104w78787878878787787887)
+    STAGE_N(11, 104w87878787878787878787)
 
-    STAGE_1(8, 104w88888888888888888888)
-    STAGE_N(9, 104w99999999999999999999)
+    STAGE_1(12, 104w98989898989898989899)
+    STAGE_1(13, 104w55656565655656656565)
+    STAGE_N(14, 104w45554544545454545444)
 
-    GET_Value(0, 104w00000000000000000000, flow_size)
-    GET_Value(1, 104w11111111111111111111, flow_size)
+    GET_1_Value(0, 104w00000000000000000000, flow_size)
+    GET_1_Value(1, 104w11111111111111111111, flow_size)
     GET_Value(2, 104w22222222222222222222, flow_size)
-    GET_Value(3, 104w33333333333333333333, flow_size)
-    GET_Value(4, 104w44444444444444444444, flow_size)
+    
+    GET_1_Value(3, 104w33333333333333333333, flow_size)
+    GET_1_Value(4, 104w44444444444444444444, flow_size)
     GET_Value(5, 104w55555555555555555555, flow_size)
-    GET_Value(6, 104w66666666666666666666, flow_size)
-    GET_Value(7, 104w77777777777777777777, flow_size)
+    
+    GET_1_Value(6, 104w66666666666666666666, flow_size)
+    GET_1_Value(7, 104w77777777777777777777, flow_size)
     GET_Value(8, 104w88888888888888888888, flow_size)
-    GET_Value(9, 104w99999999999999999999, flow_size)
+    
+    GET_1_Value(9, 104w99999999999999999999, flow_size)
+    GET_1_Value(10, 104w78787878878787787887, flow_size)
+    GET_Value(11, 104w87878787878787878787, flow_size)
+    
+    GET_1_Value(12, 104w98989898989898989899, flow_size)
+    GET_1_Value(13, 104w55656565655656656565, flow_size)
+    GET_Value(14, 104w45554544545454545444, flow_size)
+
 
     apply{
 
@@ -534,13 +587,15 @@ control Measurement(inout headers hdr,
                     // Process packet in S1
 
                     // Pipe part 
+                    meta.carriedTimestamp = meta.timestamp;
                     meta.carriedKey = meta.flowID;
                     meta.carriedCount = meta.flow_cnt;
 
                     do_stage0(meta);
-                    do_stage1(meta);
-                    hash(meta.ha_r4, HashAlgorithm.crc16, HASH_BASE, {meta.carriedKey, HASH_SEED_r4}, HASH_MAX);
-
+                    //if meta.carriedKey != 0:
+                        do_stage1(meta);
+                    //if meta.carriedKey != 0:
+                        do_stage2(meta);            
                 
 
                     // Sketch part
@@ -582,13 +637,16 @@ control Measurement(inout headers hdr,
                             cm_sketch5_r3.read(new_3, meta.ha_r3);
                             min_cnt(new_est, new_1, new_2, new_3);                           
 
-                            get_pipe6(meta, old_est);
-                            get_pipe7(meta, old_est);
+                            get_pipe9(meta, old_est);
+                            get_pipe10(meta, old_est);
+                            get_pipe11(meta, old_est);
 
 
 
-                            get_pipe8(meta, new_est);
-                            get_pipe9(meta, new_est);
+                            get_pipe12(meta, new_est);
+                            get_pipe13(meta, new_est);
+                            get_pipe14(meta, new_est);
+
 
                             bit<32> old_4;
                             bit<32> new_4;
@@ -639,11 +697,15 @@ control Measurement(inout headers hdr,
 
 
                     // Pipe part 
+                    meta.carriedTimestamp = meta.timestamp;
                     meta.carriedKey = meta.flowID;
-                    meta.carriedCount = est;
+                    meta.carriedCount = meta.flow_cnt;
 
-                    do_stage2(meta);
                     do_stage3(meta);
+                    //if meta.carriedKey != 0:
+                        do_stage4(meta);
+                    //if meta.carriedKey != 0:
+                        do_stage5(meta);     
                     
                     cm_sketch2_r1.read(meta.qc_r1, meta.ha_r1);
                     cm_sketch2_r2.read(meta.qc_r2, meta.ha_r2);
@@ -687,12 +749,15 @@ control Measurement(inout headers hdr,
                             min_cnt(new_est, new_1, new_2, new_3);
 
 
-                            get_pipe8(meta, old_est);
-                            get_pipe9(meta, old_est);
+                            get_pipe12(meta, old_est);
+                            get_pipe13(meta, old_est);
+                            get_pipe14(meta, old_est);
+
 
 
                             get_pipe0(meta, new_est);
                             get_pipe1(meta, new_est);
+                            get_pipe2(meta, new_est);
 
 
 
@@ -743,12 +808,15 @@ control Measurement(inout headers hdr,
 
 
                     // Pipe part 
+                    meta.carriedTimestamp = meta.timestamp;
                     meta.carriedKey = meta.flowID;
-                    meta.carriedCount = est;
+                    meta.carriedCount = meta.flow_cnt;
 
-
-                    do_stage4(meta);
-                    do_stage5(meta);
+                    do_stage6(meta);
+                    //if meta.carriedKey != 0:
+                        do_stage7(meta);
+                    //if meta.carriedKey != 0:
+                        do_stage8(meta);     
 
                     cm_sketch3_r1.read(meta.qc_r1, meta.ha_r1);
                     cm_sketch3_r2.read(meta.qc_r2, meta.ha_r2);
@@ -805,10 +873,13 @@ control Measurement(inout headers hdr,
 
                             get_pipe0(meta, old_est);
                             get_pipe1(meta, old_est);
+                            get_pipe2(meta, old_est);
 
 
-                            get_pipe2(meta, new_est);
+
                             get_pipe3(meta, new_est);
+                            get_pipe4(meta, new_est);
+                            get_pipe5(meta, new_est);
 
 
                             if(new_est > old_est + CHANGE_THRESHOLD){
@@ -856,12 +927,15 @@ control Measurement(inout headers hdr,
 
   
                     // Pipe part 
+                    meta.carriedTimestamp = meta.timestamp;
                     meta.carriedKey = meta.flowID;
-                    meta.carriedCount = est;
+                    meta.carriedCount = meta.flow_cnt;
 
-
-                    do_stage6(meta);
-                    do_stage7(meta);
+                    do_stage9(meta);
+                    //if meta.carriedKey != 0:
+                        do_stage10(meta);
+                    //if meta.carriedKey != 0:
+                        do_stage11(meta);     
                     
                     cm_sketch4_r1.read(meta.qc_r1, meta.ha_r1);
                     cm_sketch4_r2.read(meta.qc_r2, meta.ha_r2);
@@ -903,12 +977,15 @@ control Measurement(inout headers hdr,
                             min_cnt(new_est, new_1, new_2, new_3);
                             
 
-                            get_pipe2(meta, old_est);
                             get_pipe3(meta, old_est);
+                            get_pipe4(meta, old_est);
+                            get_pipe5(meta, old_est);
 
 
-                            get_pipe4(meta, new_est);
-                            get_pipe5(meta, new_est);
+
+                            get_pipe6(meta, new_est);
+                            get_pipe7(meta, new_est);
+                            get_pipe8(meta, new_est);
 
 
 
@@ -955,12 +1032,15 @@ control Measurement(inout headers hdr,
 
                     
                     // Pipe part 
+                    meta.carriedTimestamp = meta.timestamp;
                     meta.carriedKey = meta.flowID;
-                    meta.carriedCount = est;
+                    meta.carriedCount = meta.flow_cnt;
 
-
-                    do_stage8(meta);
-                    do_stage9(meta);
+                    do_stage12(meta);
+                    //if meta.carriedKey != 0:
+                        do_stage13(meta);
+                    //if meta.carriedKey != 0:
+                        do_stage14(meta);     
 
                     cm_sketch5_r1.read(meta.qc_r1, meta.ha_r1);
                     cm_sketch5_r2.read(meta.qc_r2, meta.ha_r2);
@@ -1001,12 +1081,15 @@ control Measurement(inout headers hdr,
                             min_cnt(new_est, new_1, new_2, new_3);
                             
 
-                            get_pipe4(meta, old_est);
-                            get_pipe5(meta, old_est);
+                            get_pipe6(meta, old_est);
+                            get_pipe7(meta, old_est);
+                            get_pipe8(meta, old_est);
 
 
-                            get_pipe6(meta, new_est);
-                            get_pipe7(meta, new_est);
+
+                            get_pipe9(meta, new_est);
+                            get_pipe10(meta, new_est);
+                            get_pipe11(meta, new_est);
 
 
 

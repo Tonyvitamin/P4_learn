@@ -42,9 +42,10 @@ echo register_reset hp6           | simple_switch_CLI --thrift-port 9090 > /dev/
 echo register_reset hp7           | simple_switch_CLI --thrift-port 9090 > /dev/null
 echo register_reset hp8           | simple_switch_CLI --thrift-port 9090 > /dev/null
 echo register_reset hp9           | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset hp10           | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset hp11           | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset hp12           | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset hp13           | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset hp14           | simple_switch_CLI --thrift-port 9090 > /dev/null
 
-echo register_reset post_sketch1_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null
-echo register_reset post_sketch2_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null
-echo register_reset post_sketch3_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null
-echo register_reset post_sketch4_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null
-echo register_reset post_sketch5_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
