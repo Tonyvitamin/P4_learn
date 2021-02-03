@@ -363,7 +363,7 @@ class ExerciseRunner:
         #h5.cmd('iperf -s -u -i 2 > ./Experiment/n_flows/2_flow_case/x_h5.txt &')
         #h6.cmd('iperf -s -u -i 2 > ./Experiment/n_flows/2_flow_case/x_h6.txt &')
 
-        for t in range(10):
+        for t in range(2):
             duration = 30 #random.randint(10, 50)
             interval = 2
             data_rate = 20

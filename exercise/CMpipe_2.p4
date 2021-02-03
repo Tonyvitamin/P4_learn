@@ -4,15 +4,13 @@
 
 const bit<8>  TCP_PROTOCOL = 0x06;
 const bit<16> TYPE_IPV4 = 0x800;
-const bit<48> TIME_DELTA = 1000;
+const bit<19> ECN_THRESHOLD = 10;
 
 
 // Sketch part
 #define HASH_SEED_r1 10w12
 #define HASH_SEED_r2 10w34
 #define HASH_SEED_r3 10w56
-#define HASH_SEED_r4 10w78
-
 #define HASH_BASE 10w0
 #define HASH_MAX 10w19
 
@@ -29,29 +27,14 @@ const bit<48> TIME_DELTA = 1000;
 
 /* MACROS */
 /* Sketch part */
-
-#define Read_Sketch_n(num, seed) \
-action read_sketch##num(inout metadata meta) {\
-cm_sketch##num_r1.read(meta.qc_r1, meta.ha_r1);\
-cm_sketch##num_r2.read(meta.qc_r2, meta.ha_r2);\
-cm_sketch##num_r3.read(meta.qc_r3, meta.ha_r3);\
+#define GET_Sketch_value(num, seed, flow_size) \
+hash(meta.currentIndex, HashAlgorithm.crc32, (bit<32>)0, {meta.original_flowID, seed}, (bit<32>)ENTRIES_PER_TABLE);\
+hp##num.read(meta.currentEntry, meta.currentIndex);\
+meta.currentKey = meta.currentEntry[135:32];\
+meta.currentCount = meta.currentEntry[31:0];\
+if (meta.flowID - meta.currentKey == 0) {\
+    flow_size = flow_size + meta.currentCount;\
 }
-
-#define Write_Sketch_n(num, seed) \
-action write_sketch##num(inout metadata meta) {\
-cm_sketch##num_r1.write(meta.ha_r1, meta.qc_r1+meta.flow_cnt);\
-cm_sketch##num_r2.write(meta.ha_r2, meta.qc_r2+meta.flow_cnt);\
-cm_sketch##num_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);\
-}
-
-#define Get_Sketch_n(num, seed) \
-action get_sketch##num(inout metadata meta, inout bit<32> est1, inout bit<32> est2, inout bit<32> est3) {\
-cm_sketch##num_r1.read(est1, meta.ha_r1);\
-cm_sketch##num_r2.read(est2, meta.ha_r2);\
-cm_sketch##num_r3.read(est3, meta.ha_r3);\
-}
-
-
 
 /* Pipe part */
 #define ENTRIES_PER_TABLE 20
@@ -67,14 +50,12 @@ cm_sketch##num_r3.read(est3, meta.ha_r3);\
 #define HP_INIT(num) register<bit<ENTRY_WIDTH>>(ENTRIES_PER_TABLE) hp##num
 
 #define GET_Value(num, seed, flow_size) \
-action get_pipe##num (inout metadata meta, inout bit<32> flow_size){\
 hash(meta.currentIndex, HashAlgorithm.crc32, (bit<32>)0, {meta.original_flowID, seed}, (bit<32>)ENTRIES_PER_TABLE);\
 hp##num.read(meta.currentEntry, meta.currentIndex);\
 meta.currentKey = meta.currentEntry[135:32];\
 meta.currentCount = meta.currentEntry[31:0];\
 if (meta.original_flowID - meta.currentKey == 0) {\
     flow_size = flow_size + meta.currentCount;\
-}\
 }
 
 
@@ -84,41 +65,22 @@ hp##num.read(meta.currentEntry, meta.currentIndex);
 
 #define WRITE_ENTRY(num, entry) hp##num.write(meta.currentIndex, entry)
 
-#define STAGE_1(num, seed) \
-action do_stage##num (inout metadata meta){\
+#define STAGE_N(num, seed) {\
 meta.flowID = meta.carriedKey;\
 GET_ENTRY(num, seed);\
 meta.currentKey = meta.currentEntry[135:32];\
 meta.currentCount = meta.currentEntry[31:0];\
 if (meta.currentKey - meta.carriedKey == 0) {\
     meta.toWriteKey = meta.currentKey;\
-    meta.toWriteCount = meta.currentCount + meta.carriedCount;\
+    if (meta.fromSketch == 1){\
+        meta.toWriteCount = meta.currentCount + meta.flow_cnt;\
+    }\
+    else{\
+        meta.toWriteCount = meta.currentCount + meta.carriedCount;\
+    }\
     meta.carriedKey = 0;\
     meta.carriedCount = 0;\
-} else {\
-        meta.toWriteKey = meta.carriedKey;\
-        meta.toWriteCount = meta.carriedCount;\
-\
-        meta.carriedKey = meta.currentKey;\
-        meta.carriedCount = meta.currentCount;\
-}\
-bit<136> temp = meta.toWriteKey ++ meta.toWriteCount;\
-WRITE_ENTRY(num, temp);\
-}
-
-
-
-#define STAGE_N(num, seed) \
-action do_stage##num (inout metadata meta){\
-meta.flowID = meta.carriedKey;\
-GET_ENTRY(num, seed);\
-meta.currentKey = meta.currentEntry[135:32];\
-meta.currentCount = meta.currentEntry[31:0];\
-if (meta.currentKey - meta.carriedKey == 0) {\
-    meta.toWriteKey = meta.currentKey;\
-    meta.toWriteCount = meta.currentCount + meta.carriedCount;\
-    meta.carriedKey = 0;\
-    meta.carriedCount = 0;\
+    meta.fromSketch = 0;\
 } else {\
     if (meta.carriedCount > meta.currentCount) {\
         meta.toWriteKey = meta.carriedKey;\
@@ -126,6 +88,7 @@ if (meta.currentKey - meta.carriedKey == 0) {\
 \
         meta.carriedKey = meta.currentKey;\
         meta.carriedCount = meta.currentCount;\
+        meta.fromSketch = 0;\
     } else {\
         meta.toWriteKey = meta.currentKey;\
         meta.toWriteCount = meta.currentCount;\
@@ -156,6 +119,7 @@ HP_INIT(9);
 const bit<32> FLOW_TABLE_SIZE_EACH = 20;
 const bit<48> INTERVAL_SIZE = 2000000;
 const bit<32> CHANGE_THRESHOLD = 100;
+const bit<32> CM_THRESHOLD = 200;
 
 
 const bit<32> BITMAP_FILTER_SIZE_EACH = 10000;
@@ -262,6 +226,7 @@ struct metadata {
     port_t    dstPort;
     bit<8> protocol;
 
+    bit<3>      fromSketch;
     bit<32>     currentIndex;
     bit<136>    currentEntry;
 
@@ -283,16 +248,12 @@ struct metadata {
     bit<32> ha_r1;
     bit<32> ha_r2;
     bit<32> ha_r3;
-    bit<32> ha_r4;
-
 
     bit<32> bm_r1;
 
     bit<32> qc_r1;
     bit<32> qc_r2;
     bit<32> qc_r3;
-    bit<32> qc_r4;
-
 
 }
 
@@ -387,23 +348,16 @@ control Measurement(inout headers hdr,
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch1_r2;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch1_r3;
 
-    register<bit<32> >(FLOW_TABLE_SIZE_EACH) post_sketch1_r1;
-
 
     /* Sketch 2: CM Sketch */
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch2_r1;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch2_r2;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch2_r3;
 
-    register<bit<32> >(FLOW_TABLE_SIZE_EACH) post_sketch2_r1;
-
-
     /* Sketch 3: CM Sketch */
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch3_r1;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch3_r2;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch3_r3;
-
-    register<bit<32> >(FLOW_TABLE_SIZE_EACH) post_sketch3_r1;
 
 
     /* Sketch 4: CM Sketch */
@@ -411,17 +365,10 @@ control Measurement(inout headers hdr,
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch4_r2;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch4_r3;
 
-    register<bit<32> >(FLOW_TABLE_SIZE_EACH) post_sketch4_r1;
-
-
     /* Sketch 5: CM Sketch */
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch5_r1;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch5_r2;
     register<bit<32> >(FLOW_TABLE_SIZE_EACH) cm_sketch5_r3;
-
-    register<bit<32> >(FLOW_TABLE_SIZE_EACH) post_sketch5_r1;
-
-
 
     /* Queried Mask(bloom filter) */
     // In case that queried flow keep forwarding packet to controller to remind controller this flow change
@@ -452,33 +399,6 @@ control Measurement(inout headers hdr,
             mincnt = cnt3;
         }
     }
-    
-    STAGE_1(0, 104w00000000000000000000)
-    STAGE_N(1, 104w11111111111111111111)
-    
-    STAGE_1(2, 104w22222222222222222222)
-    STAGE_N(3, 104w33333333333333333333)
-
-    STAGE_1(4, 104w44444444444444444444)
-    STAGE_N(5, 104w55555555555555555555)
-
-    STAGE_1(6, 104w66666666666666666666)
-    STAGE_N(7, 104w77777777777777777777)
-
-    STAGE_1(8, 104w88888888888888888888)
-    STAGE_N(9, 104w99999999999999999999)
-
-    GET_Value(0, 104w00000000000000000000, flow_size)
-    GET_Value(1, 104w11111111111111111111, flow_size)
-    GET_Value(2, 104w22222222222222222222, flow_size)
-    GET_Value(3, 104w33333333333333333333, flow_size)
-    GET_Value(4, 104w44444444444444444444, flow_size)
-    GET_Value(5, 104w55555555555555555555, flow_size)
-    GET_Value(6, 104w66666666666666666666, flow_size)
-    GET_Value(7, 104w77777777777777777777, flow_size)
-    GET_Value(8, 104w88888888888888888888, flow_size)
-    GET_Value(9, 104w99999999999999999999, flow_size)
-
     apply{
 
 
@@ -533,24 +453,27 @@ control Measurement(inout headers hdr,
 
                     // Process packet in S1
 
-                    // Pipe part 
-                    meta.carriedKey = meta.flowID;
-                    meta.carriedCount = meta.flow_cnt;
-
-                    do_stage0(meta);
-                    do_stage1(meta);
-                    hash(meta.ha_r4, HashAlgorithm.crc16, HASH_BASE, {meta.carriedKey, HASH_SEED_r4}, HASH_MAX);
-
-                
-
                     // Sketch part
                     cm_sketch1_r1.read(meta.qc_r1, meta.ha_r1);
                     cm_sketch1_r2.read(meta.qc_r2, meta.ha_r2);
                     cm_sketch1_r3.read(meta.qc_r3, meta.ha_r3);
 
-                    cm_sketch1_r1.write(meta.ha_r1, meta.qc_r1+meta.carriedCount);
-                    cm_sketch1_r2.write(meta.ha_r2, meta.qc_r2+meta.carriedCount);
-                    cm_sketch1_r3.write(meta.ha_r3, meta.qc_r3+meta.carriedCount);
+                    cm_sketch1_r1.write(meta.ha_r1, meta.qc_r1+meta.flow_cnt);
+                    cm_sketch1_r2.write(meta.ha_r2, meta.qc_r2+meta.flow_cnt);
+                    cm_sketch1_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);
+
+                    // CM threshold setting for sketch part
+                    bit <32> est;
+                    min_cnt(est, meta.qc_r1+meta.flow_cnt, meta.qc_r2+meta.flow_cnt, meta.qc_r3+meta.flow_cnt );
+
+                    // Pipe part 
+                    if (est > CM_THRESHOLD){
+                        meta.carriedKey = meta.flowID;
+                        meta.carriedCount = est;
+                        meta.fromSketch = 1;
+                        STAGE_N(0, 104w00000000000000000000);
+                        STAGE_N(1, 104w11111111111111111111);
+                    }
 
                     // Query S5-S4 if necessary
                         bit<2> index_1;
@@ -562,36 +485,33 @@ control Measurement(inout headers hdr,
                         // Never Queried before
                         if(index_1!=1 ){
                             
-                            bit<32> old_1;
-                            bit<32> old_2;
-                            bit<32> old_3;
+                            /*
+                            bit <32> old_est;
+                            bit <32> old_est2;
+                            old_est = 0;
+                            GET_Value(8, 104w88888888888888888888, old_est);
+                            GET_Value(9, 104w99999999999999999999, old_est);
+                            //old_est = old_est + old_est2;
+                            mask_queried_1.write(meta.bm_r1, 1);
+                            standard_metadata.egress_spec = 255;
+                            meta.sign = 0;
+                            meta.timestamp = ct;
+                            meta.flow_size_1 = old_est;
+                            meta.flow_size_2 = old_est;
+                            meta.flag = flag;
+                            */
+                            
+
+                            
                             bit<32> old_est;
+                            old_est = 0;
+                            GET_Value(6, 104w66666666666666666666, old_est);
+                            GET_Value(7, 104w77777777777777777777, old_est);
 
-                            bit<32> new_1;
-                            bit<32> new_2;
-                            bit<32> new_3;
                             bit<32> new_est;
-
-                            cm_sketch4_r1.read(old_1, meta.ha_r1);
-                            cm_sketch4_r2.read(old_2, meta.ha_r2);
-                            cm_sketch4_r3.read(old_3, meta.ha_r3);
-                            min_cnt(old_est, old_1, old_2, old_3);
-
-                            cm_sketch5_r1.read(new_1, meta.ha_r1);
-                            cm_sketch5_r2.read(new_2, meta.ha_r2);
-                            cm_sketch5_r3.read(new_3, meta.ha_r3);
-                            min_cnt(new_est, new_1, new_2, new_3);                           
-
-                            get_pipe6(meta, old_est);
-                            get_pipe7(meta, old_est);
-
-
-
-                            get_pipe8(meta, new_est);
-                            get_pipe9(meta, new_est);
-
-                            bit<32> old_4;
-                            bit<32> new_4;
+                            new_est = 0;
+                            GET_Value(8, 104w88888888888888888888, new_est);
+                            GET_Value(9, 104w99999999999999999999, new_est);
 
 
                             if(new_est > old_est + CHANGE_THRESHOLD){
@@ -636,23 +556,27 @@ control Measurement(inout headers hdr,
 
 
                     // Process packet in S2
-
-
-                    // Pipe part 
-                    meta.carriedKey = meta.flowID;
-                    meta.carriedCount = est;
-
-                    do_stage2(meta);
-                    do_stage3(meta);
-                    
                     cm_sketch2_r1.read(meta.qc_r1, meta.ha_r1);
                     cm_sketch2_r2.read(meta.qc_r2, meta.ha_r2);
                     cm_sketch2_r3.read(meta.qc_r3, meta.ha_r3);
-                    
-                    cm_sketch2_r1.write(meta.ha_r1, meta.qc_r1+meta.carriedCount);
-                    cm_sketch2_r2.write(meta.ha_r2, meta.qc_r2+meta.carriedCount);
-                    cm_sketch2_r3.write(meta.ha_r3, meta.qc_r3+meta.carriedCount);
-                    
+
+                    cm_sketch2_r1.write(meta.ha_r1, meta.qc_r1+meta.flow_cnt);
+                    cm_sketch2_r2.write(meta.ha_r2, meta.qc_r2+meta.flow_cnt);
+                    cm_sketch2_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);
+
+                    // CM threshold setting for sketch part
+                    bit <32> est;
+                    min_cnt(est, meta.qc_r1+meta.flow_cnt, meta.qc_r2+meta.flow_cnt, meta.qc_r3+meta.flow_cnt );
+
+                    // Pipe part 
+                    if (est > CM_THRESHOLD){
+                        meta.carriedKey = meta.flowID;
+                        meta.carriedCount = est;
+                        meta.fromSketch = 1;
+                        STAGE_N(2, 104w22222222222222222222);
+                        STAGE_N(3, 104w33333333333333333333);
+                    }
+
 
                     // Query S1-S5 if necessary
                         bit<2> index_1;
@@ -663,37 +587,29 @@ control Measurement(inout headers hdr,
 
                         // Never Queried before
                         if(index_1!=1){
-
-
-
-                            bit<32> old_1;
-                            bit<32> old_2;
-                            bit<32> old_3;
+                            /*
+                            bit <32> old_est;
+                            old_est = 0;
+                            GET_Value(0, 104w00000000000000000000, old_est);
+                            GET_Value(1, 104w11111111111111111111, old_est);
+                            mask_queried_2.write(meta.bm_r1, 1);
+                            standard_metadata.egress_spec = 255;
+                            meta.sign = 0;
+                            meta.timestamp = ct;
+                            meta.flow_size_1 = old_est;
+                            meta.flow_size_2 = old_est;
+                            meta.flag = flag;
+                            */
+                            
                             bit<32> old_est;
+                            old_est = 0;
+                            GET_Value(8, 104w88888888888888888888, old_est);
+                            GET_Value(9, 104w99999999999999999999, old_est);
 
-                            bit<32> new_1;
-                            bit<32> new_2;
-                            bit<32> new_3;
                             bit<32> new_est;
-
-                            cm_sketch5_r1.read(old_1, meta.ha_r1);
-                            cm_sketch5_r2.read(old_2, meta.ha_r2);
-                            cm_sketch5_r3.read(old_3, meta.ha_r3);
-                            min_cnt(old_est, old_1, old_2, old_3);
-
-                            cm_sketch1_r1.read(new_1, meta.ha_r1);
-                            cm_sketch1_r2.read(new_2, meta.ha_r2);
-                            cm_sketch1_r3.read(new_3, meta.ha_r3);
-                            min_cnt(new_est, new_1, new_2, new_3);
-
-
-                            get_pipe8(meta, old_est);
-                            get_pipe9(meta, old_est);
-
-
-                            get_pipe0(meta, new_est);
-                            get_pipe1(meta, new_est);
-
+                            new_est = 0;
+                            GET_Value(0, 104w00000000000000000000, new_est);
+                            GET_Value(1, 104w11111111111111111111, new_est);
 
 
                             if(new_est > old_est + CHANGE_THRESHOLD){
@@ -738,26 +654,28 @@ control Measurement(inout headers hdr,
                 else if(flag==3){
 
                     // Process packet in S3
-
-      
-
-
-                    // Pipe part 
-                    meta.carriedKey = meta.flowID;
-                    meta.carriedCount = est;
-
-
-                    do_stage4(meta);
-                    do_stage5(meta);
-
                     cm_sketch3_r1.read(meta.qc_r1, meta.ha_r1);
                     cm_sketch3_r2.read(meta.qc_r2, meta.ha_r2);
                     cm_sketch3_r3.read(meta.qc_r3, meta.ha_r3);
-                    
-                    cm_sketch3_r1.write(meta.ha_r1, meta.qc_r1+meta.carriedCount);
-                    cm_sketch3_r2.write(meta.ha_r2, meta.qc_r2+meta.carriedCount);
-                    cm_sketch3_r3.write(meta.ha_r3, meta.qc_r3+meta.carriedCount);
-                    
+
+                    cm_sketch3_r1.write(meta.ha_r1, meta.qc_r1+meta.flow_cnt);
+                    cm_sketch3_r2.write(meta.ha_r2, meta.qc_r2+meta.flow_cnt);
+                    cm_sketch3_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);           
+
+
+                    // CM threshold setting for sketch part
+                    bit <32> est;
+                    min_cnt(est, meta.qc_r1+meta.flow_cnt, meta.qc_r2+meta.flow_cnt, meta.qc_r3+meta.flow_cnt );
+
+                    // Pipe part 
+                    if (est > CM_THRESHOLD){
+                        meta.carriedKey = meta.flowID;
+                        meta.carriedCount = est;
+                        meta.fromSketch = 1;
+                        STAGE_N(4, 104w44444444444444444444);
+                        STAGE_N(5, 104w55555555555555555555);
+                    }
+
 
                     // Query S2-S1 if necessary
                         bit<2> index_1;
@@ -782,33 +700,16 @@ control Measurement(inout headers hdr,
                             meta.flag = flag;
                             */
 
-                            bit<32> old_1;
-                            bit<32> old_2;
-                            bit<32> old_3;
+                            
                             bit<32> old_est;
+                            old_est = 0;
+                            GET_Value(0, 104w00000000000000000000, old_est);
+                            GET_Value(1, 104w11111111111111111111, old_est);
 
-                            bit<32> new_1;
-                            bit<32> new_2;
-                            bit<32> new_3;
                             bit<32> new_est;
-
-                            cm_sketch1_r1.read(old_1, meta.ha_r1);
-                            cm_sketch1_r2.read(old_2, meta.ha_r2);
-                            cm_sketch1_r3.read(old_3, meta.ha_r3);
-                            min_cnt(old_est, old_1, old_2, old_3);
-
-                            cm_sketch2_r1.read(new_1, meta.ha_r1);
-                            cm_sketch2_r2.read(new_2, meta.ha_r2);
-                            cm_sketch2_r3.read(new_3, meta.ha_r3);
-                            min_cnt(new_est, new_1, new_2, new_3);
-
-
-                            get_pipe0(meta, old_est);
-                            get_pipe1(meta, old_est);
-
-
-                            get_pipe2(meta, new_est);
-                            get_pipe3(meta, new_est);
+                            new_est = 0;
+                            GET_Value(2, 104w22222222222222222222, new_est);
+                            GET_Value(3, 104w33333333333333333333, new_est);
 
 
                             if(new_est > old_est + CHANGE_THRESHOLD){
@@ -852,24 +753,27 @@ control Measurement(inout headers hdr,
                 else if(flag==4){
 
                     // Process packet in S4
-
-
-  
-                    // Pipe part 
-                    meta.carriedKey = meta.flowID;
-                    meta.carriedCount = est;
-
-
-                    do_stage6(meta);
-                    do_stage7(meta);
-                    
                     cm_sketch4_r1.read(meta.qc_r1, meta.ha_r1);
                     cm_sketch4_r2.read(meta.qc_r2, meta.ha_r2);
                     cm_sketch4_r3.read(meta.qc_r3, meta.ha_r3);
-                    
-                    cm_sketch4_r1.write(meta.ha_r1, meta.qc_r1+meta.carriedCount);
-                    cm_sketch4_r2.write(meta.ha_r2, meta.qc_r2+meta.carriedCount);
-                    cm_sketch4_r3.write(meta.ha_r3, meta.qc_r3+meta.carriedCount);
+
+                    cm_sketch4_r1.write(meta.ha_r1, meta.qc_r1+meta.flow_cnt);
+                    cm_sketch4_r2.write(meta.ha_r2, meta.qc_r2+meta.flow_cnt);
+                    cm_sketch4_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);
+   
+                    // CM threshold setting for sketch part
+                    bit <32> est;
+                    min_cnt(est, meta.qc_r1+meta.flow_cnt, meta.qc_r2+meta.flow_cnt, meta.qc_r3+meta.flow_cnt );
+
+                    // Pipe part 
+                    if (est > CM_THRESHOLD){
+                        meta.carriedKey = meta.flowID;
+                        meta.carriedCount = est;
+                        meta.fromSketch = 1;
+                        STAGE_N(6, 104w66666666666666666666);
+                        STAGE_N(7, 104w77777777777777777777);
+                    }
+
 
                     // Query S3-S2 if necessary
                         bit<2> index_1;
@@ -880,35 +784,30 @@ control Measurement(inout headers hdr,
 
                         // Never Queried before
                         if(index_1!=1){
+                            /*
+                            bit <32> old_est;
+                            old_est = 0;
+                            GET_Value(4, 104w44444444444444444444, old_est);
+                            GET_Value(5, 104w55555555555555555555, old_est);
+                            mask_queried_4.write(meta.bm_r1, 1);
+                            standard_metadata.egress_spec = 255;
+                            meta.sign = 0;
+                            meta.timestamp = ct;
+                            meta.flow_size_1 = old_est;
+                            meta.flow_size_2 = old_est;
+                            meta.flag = flag;
+                            */
 
-
-                            bit<32> old_1;
-                            bit<32> old_2;
-                            bit<32> old_3;
-                            bit<32> old_est;
-
-                            bit<32> new_1;
-                            bit<32> new_2;
-                            bit<32> new_3;
-                            bit<32> new_est;
-
-                            cm_sketch2_r1.read(old_1, meta.ha_r1);
-                            cm_sketch2_r2.read(old_2, meta.ha_r2);
-                            cm_sketch2_r3.read(old_3, meta.ha_r3);
-                            min_cnt(old_est, old_1, old_2, old_3);
-
-                            cm_sketch3_r1.read(new_1, meta.ha_r1);
-                            cm_sketch3_r2.read(new_2, meta.ha_r2);
-                            cm_sketch3_r3.read(new_3, meta.ha_r3);
-                            min_cnt(new_est, new_1, new_2, new_3);
                             
+                            bit<32> old_est;
+                            old_est = 0;
+                            GET_Value(2, 104w22222222222222222222, old_est);
+                            GET_Value(3, 104w33333333333333333333, old_est);
 
-                            get_pipe2(meta, old_est);
-                            get_pipe3(meta, old_est);
-
-
-                            get_pipe4(meta, new_est);
-                            get_pipe5(meta, new_est);
+                            bit<32> new_est;
+                            new_est = 0;
+                            GET_Value(4, 104w44444444444444444444, new_est);
+                            GET_Value(5, 104w55555555555555555555, new_est);
 
 
 
@@ -952,23 +851,27 @@ control Measurement(inout headers hdr,
                 else if(flag==5){
 
                     // Process packet in S4
-
-                    
-                    // Pipe part 
-                    meta.carriedKey = meta.flowID;
-                    meta.carriedCount = est;
-
-
-                    do_stage8(meta);
-                    do_stage9(meta);
-
                     cm_sketch5_r1.read(meta.qc_r1, meta.ha_r1);
                     cm_sketch5_r2.read(meta.qc_r2, meta.ha_r2);
                     cm_sketch5_r3.read(meta.qc_r3, meta.ha_r3);
 
-                    cm_sketch5_r1.write(meta.ha_r1, meta.qc_r1+meta.carriedCount);
-                    cm_sketch5_r2.write(meta.ha_r2, meta.qc_r2+meta.carriedCount);
-                    cm_sketch5_r3.write(meta.ha_r3, meta.qc_r3+meta.carriedCount);
+                    cm_sketch5_r1.write(meta.ha_r1, meta.qc_r1+meta.flow_cnt);
+                    cm_sketch5_r2.write(meta.ha_r2, meta.qc_r2+meta.flow_cnt);
+                    cm_sketch5_r3.write(meta.ha_r3, meta.qc_r3+meta.flow_cnt);
+   
+                    // CM threshold setting for sketch part
+                    bit <32> est;
+                    min_cnt(est, meta.qc_r1+meta.flow_cnt, meta.qc_r2+meta.flow_cnt, meta.qc_r3+meta.flow_cnt );
+
+                    // Pipe part 
+                    if (est > CM_THRESHOLD){
+                        meta.carriedKey = meta.flowID;
+                        meta.carriedCount = est;
+                        meta.fromSketch = 1;
+                        STAGE_N(8, 104w88888888888888888888);
+                        STAGE_N(9, 104w99999999999999999999);
+                    }
+
 
                     // Query S4-S3 if necessary
                         bit<2> index_1;
@@ -979,35 +882,30 @@ control Measurement(inout headers hdr,
 
                         // Never Queried before
                         if(index_1!=1){
+                            /*
+                            bit <32> old_est;
+                            old_est = 0;
+                            GET_Value(6, 104w66666666666666666666, old_est);
+                            GET_Value(7, 104w77777777777777777777, old_est);
+                            mask_queried_5.write(meta.bm_r1, 1);
+                            standard_metadata.egress_spec = 255;
+                            meta.sign = 0;
+                            meta.timestamp = ct;
+                            meta.flow_size_1 = old_est;
+                            meta.flow_size_2 = old_est;
+                            meta.flag = flag;
+                            */
 
-                            bit<32> old_1;
-                            bit<32> old_2;
-                            bit<32> old_3;
-                            bit<32> old_est;
-
-                            bit<32> new_1;
-                            bit<32> new_2;
-                            bit<32> new_3;
-                            bit<32> new_est;
-
-                            cm_sketch3_r1.read(old_1, meta.ha_r1);
-                            cm_sketch3_r2.read(old_2, meta.ha_r2);
-                            cm_sketch3_r3.read(old_3, meta.ha_r3);
-                            min_cnt(old_est, old_1, old_2, old_3);
-
-                            cm_sketch4_r1.read(new_1, meta.ha_r1);
-                            cm_sketch4_r2.read(new_2, meta.ha_r2);
-                            cm_sketch4_r3.read(new_3, meta.ha_r3);
-                            min_cnt(new_est, new_1, new_2, new_3);
                             
+                            bit<32> old_est;
+                            old_est = 0;
+                            GET_Value(4, 104w44444444444444444444, old_est);
+                            GET_Value(5, 104w55555555555555555555, old_est);
 
-                            get_pipe4(meta, old_est);
-                            get_pipe5(meta, old_est);
-
-
-                            get_pipe6(meta, new_est);
-                            get_pipe7(meta, new_est);
-
+                            bit<32> new_est;
+                            new_est = 0;
+                            GET_Value(6, 104w66666666666666666666, new_est);
+                            GET_Value(7, 104w77777777777777777777, new_est);
 
 
                             if(new_est > old_est + CHANGE_THRESHOLD){
