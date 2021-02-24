@@ -332,28 +332,7 @@ def main(p4info_file_path, bmv2_file_path):
                         index = 0
                         for i in reversed(tmp):
                             v += i * math.pow(2, index)
-                            index+=8
-                        '''
-                        if metadata_id == 3:
-                            print "sketch 1 row 1: ", v
-                            #t1_packet_num = v
-                        elif metadata_id ==4:
-                            print "sketch 1 row 2: ", v
-                            #t2_packet_num = v
-                        elif metadata_id ==5:
-                            print "sketch 1 row 3: ", v
-                            #timestamp = v                            
-                            
-                        if metadata_id == 6:
-                            print "sketch 2 row 1 ", v
-                            #t1_packet_num = v
-                        elif metadata_id ==7:
-                            print "sketch 2 row 2 ", v
-                            #t2_packet_num = v
-                        elif metadata_id ==8:
-                            print "sketch 2 row 3 ", v
-                            #timestamp = v   
-                        '''                         
+                            index+=8           
                             
                         if metadata_id == 3:
                             print "Packet count in time interval i: ", v
@@ -387,7 +366,7 @@ def main(p4info_file_path, bmv2_file_path):
                 num+=1
                 #print s1_flow_detection
                 print "Received : ", num, " packets"
-                directory = './Experiment/n_flows/2_flow_case/' + str(s1_flow_detection[key].flow_id)
+                directory = './Experiment/test_2_2_2/1_flow_case/' + str(s1_flow_detection[key].flow_id)
                 if not os.path.exists(directory):
                     os.mkdir(directory)
                 filename = directory+'/'+str(s1_flow_detection[key].flow_id)+".txt"

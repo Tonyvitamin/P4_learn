@@ -3,6 +3,51 @@
 echo register_reset start_flag | simple_switch_CLI --thrift-port 9090 > /dev/null
 echo register_reset state_flag | simple_switch_CLI --thrift-port 9090 > /dev/null
 
+echo register_reset Flow_ID_0 | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset Counter_0 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
+echo register_reset Flow_ID_1 | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset Counter_1 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
+echo register_reset Flow_ID_2 | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset Counter_2 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
+echo register_reset Flow_ID_3 | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset Counter_3 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
+echo register_reset Flow_ID_4 | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset Counter_4 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
+echo register_reset Flow_ID_5 | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset Counter_5 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
+echo register_reset Flow_ID_6 | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset Counter_6 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
+echo register_reset Flow_ID_7 | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset Counter_7 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
+echo register_reset Flow_ID_8 | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset Counter_8 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
+echo register_reset Flow_ID_9 | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset Counter_9 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
+echo register_reset Flow_ID_10 | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset Counter_10 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
+echo register_reset Flow_ID_11 | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset Counter_11 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
+echo register_reset Flow_ID_12 | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset Counter_12 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
+echo register_reset Flow_ID_13 | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset Counter_13 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
+echo register_reset Flow_ID_14 | simple_switch_CLI --thrift-port 9090 > /dev/null
+echo register_reset Counter_14 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
 #echo register_reset last_timestamp | simple_switch_CLI --thrift-port 9090 > /dev/null
 #echo register_reset cur_timestamp | simple_switch_CLI --thrift-port 9090 > /dev/null
 echo register_reset cm_sketch2_r1 | simple_switch_CLI --thrift-port 9090 > /dev/null
@@ -26,11 +71,7 @@ echo register_reset cm_sketch5_r1 | simple_switch_CLI --thrift-port 9090 > /dev/
 echo register_reset cm_sketch5_r2 | simple_switch_CLI --thrift-port 9090 > /dev/null
 echo register_reset cm_sketch5_r3 | simple_switch_CLI --thrift-port 9090 > /dev/null
     
-echo register_reset mask_queried_1 | simple_switch_CLI --thrift-port 9090 > /dev/null
-echo register_reset mask_queried_2 | simple_switch_CLI --thrift-port 9090 > /dev/null  
-echo register_reset mask_queried_3 | simple_switch_CLI --thrift-port 9090 > /dev/null   
-echo register_reset mask_queried_4 | simple_switch_CLI --thrift-port 9090 > /dev/null   
-echo register_reset mask_queried_5 | simple_switch_CLI --thrift-port 9090 > /dev/null
+
 
 echo register_reset hp0           | simple_switch_CLI --thrift-port 9090 > /dev/null
 echo register_reset hp1           | simple_switch_CLI --thrift-port 9090 > /dev/null

@@ -1,0 +1,26 @@
+------------------------------------------------------------
+Server listening on UDP port 5001
+Receiving 1470 byte datagrams
+UDP buffer size:  208 KByte (default)
+------------------------------------------------------------
+[  3] local 10.0.2.2 port 5001 connected with 10.0.1.1 port 58110
+[ ID] Interval       Transfer     Bandwidth        Jitter   Lost/Total Datagrams
+[  3]  0.0- 3.0 sec  3.35 MBytes  9.38 Mbits/sec   0.414 ms   22/ 2414 (0.91%)
+[  3]  3.0- 6.0 sec  5.87 MBytes  16.4 Mbits/sec   0.235 ms  917/ 5101 (18%)
+[  3]  6.0- 9.0 sec  5.56 MBytes  15.5 Mbits/sec   0.008 ms    1/ 3965 (0.025%)
+[  3]  9.0-12.0 sec  5.36 MBytes  15.0 Mbits/sec   0.013 ms    1/ 3827 (0.026%)
+[  3] 12.0-15.0 sec  3.19 MBytes  8.91 Mbits/sec   0.531 ms   20/ 2292 (0.87%)
+[  3] 15.0-18.0 sec  5.52 MBytes  15.4 Mbits/sec   0.207 ms 1216/ 5152 (24%)
+[  3] 18.0-21.0 sec  5.66 MBytes  15.8 Mbits/sec   0.031 ms    1/ 4036 (0.025%)
+[  3] 21.0-24.0 sec  5.36 MBytes  15.0 Mbits/sec   0.009 ms    1/ 3826 (0.026%)
+[  3] 24.0-27.0 sec  3.16 MBytes  8.84 Mbits/sec   0.545 ms    0/ 2255 (0%)
+[  3] 27.0-30.0 sec  5.53 MBytes  15.5 Mbits/sec   0.222 ms 1252/ 5197 (24%)
+[  3] 30.0-33.0 sec  5.64 MBytes  15.8 Mbits/sec   0.012 ms    1/ 4027 (0.025%)
+[  3] 33.0-36.0 sec  5.36 MBytes  15.0 Mbits/sec   0.025 ms    1/ 3827 (0.026%)
+[  3] 36.0-39.0 sec  3.18 MBytes  8.88 Mbits/sec   0.551 ms    0/ 2265 (0%)
+[  3] 39.0-42.0 sec  5.43 MBytes  15.2 Mbits/sec   0.209 ms 1247/ 5121 (24%)
+[  3] 42.0-45.0 sec  5.74 MBytes  16.0 Mbits/sec   0.027 ms    1/ 4094 (0.024%)
+[  3] 45.0-48.0 sec  5.33 MBytes  14.9 Mbits/sec   0.006 ms   21/ 3826 (0.55%)
+[  3] 48.0-51.0 sec  3.17 MBytes  8.87 Mbits/sec   0.518 ms    0/ 2264 (0%)
+[  3]  0.0-51.4 sec  82.8 MBytes  13.5 Mbits/sec   0.505 ms 4701/63776 (7.4%)
+[  3]  0.0-51.4 sec  1 datagrams received out-of-order

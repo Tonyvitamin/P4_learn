@@ -352,31 +352,32 @@ class ExerciseRunner:
             print('corresponding txt file in %s:' % self.log_dir)
             print(' for example run:  cat %s/s1-p4runtime-requests.txt' % self.log_dir)
             print('')
-        '''
+        
+        
         sleep(10)
 
         h1, h2, h3, h4, h5, h6 = self.net.get('h1', 'h2', 'h3', 'h4', 'h5', 'h6')
         #h1.cmd('iperf -s -u -i 2 > ./Experiment/n_flows/2_flow_case/x_h1.txt &')
-        h2.cmd('iperf -s -u -i 1 > ./Experiment/interval/5_sec/x_h2.txt &')
+        h2.cmd('iperf -s -u -i 3 > ./test.txt &')
         #h3.cmd('iperf -s -u -i 2 > ./Experiment/n_flows/2_flow_case/x_h3.txt &')
         #h4.cmd('iperf -s -u -i 2 > ./Experiment/n_flows/2_flow_case/x_h4.txt &')
         #h5.cmd('iperf -s -u -i 2 > ./Experiment/n_flows/2_flow_case/x_h5.txt &')
         #h6.cmd('iperf -s -u -i 2 > ./Experiment/n_flows/2_flow_case/x_h6.txt &')
 
-        for t in range(2):
-            duration = 30 #random.randint(10, 50)
-            interval = 2
-            data_rate = 20
-            command = 'iperf -c 10.0.2.2 -t ' + str(duration) + ' -i 1 -b '+ str(data_rate) +'m & '
+        for t in range(1):
+            duration = 50 #random.randint(10, 50)
+            interval = 9
+            data_rate = 45
+            command = 'iperf -c 10.0.2.2 -t ' + str(duration) + ' -i 3 -b '+ str(data_rate) +'m & '
             sleep(interval)
             cur_time = time.time()
             h1.cmd(command)
             print time.time()
-            filename = "./Experiment/interval/5_sec/start_time.txt"
+            filename = "./start_time.txt"
             with open(filename, 'a') as f:
                 string = str(cur_time) + '\n'
                 f.write(string)
-        '''
+        
         CLI(self.net)
 
 

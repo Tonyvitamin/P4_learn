@@ -923,3 +923,6 @@ RuntimeCmd:
 RuntimeCmd:cur_timestamp=
 RuntimeCmd:last_timestamp=
 RuntimeCmd:
+RuntimeCmd:cur_timestamp=
+RuntimeCmd:last_timestamp=
+RuntimeCmd:
